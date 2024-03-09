@@ -14,3 +14,15 @@ Auto Sentry is a web application designed to assist vehicle owners in managing a
 - **Service History Tracking**: Allow users to log and track maintenance and repair history for their vehicles.
 - **Integration with External Data Sources**: Integrate with external databases or APIs to retrieve vehicle-specific information.
 - **Reporting and Analytics**: Provide users with reports and analytics to help them analyze their vehicle's maintenance history, trends, and expenses.
+
+## Setting Up and Running the Project Locally for Development
+
+1. **Clone Repository**: Use Git to download project files.
+2. **Install Dependencies**: Run `npm install` in project folder.
+3. **Set Up Database**: Create PostgreSQL database and update `.env` file.
+4. **Start Server**: Launch server with `npm start`, available at `http://localhost:3000`.
+5. **Access App**: Open `http://localhost:3000` in your browser.
+6. **Optional Configuration**: Adjust settings as needed.
+7. **Testing**: Run tests with `npm test`.
+8. **Development Workflow**: Use `npm run dev` for automatic reloading.
+9. **Troubleshooting**: Refer to documentation or issue tracker for help.
