@@ -7,7 +7,7 @@ Vehicle Maintenance Tracker
 Auto Sentry is a web application designed to assist vehicle owners in managing and tracking their vehicle's maintenance activities effectively. The primary goal of this project is to provide users with a platform where they can monitor their vehicle's maintenance schedule, track service history, receive reminders for upcoming maintenance tasks, and optimize their vehicle's performance and longevity.
 
 ### Key Features
-- **User Registration and Authentication**: Allow users to create accounts securely and authenticate themselves to access the application.
+- **User Registration and User Authentication**: Allow users to create accounts securely and authenticate themselves to access the application.
 - **Vehicle Profile Management**: Enable users to add and manage multiple vehicles within their account, including make, model, year, and VIN.
 - **Maintenance Schedule Creation**: Provide users with the ability to create customized maintenance schedules based on manufacturer recommendations and driving habits.
 - **Service Reminders and Notifications**: Implement automated reminders and notifications for scheduled maintenance tasks.
