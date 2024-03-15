@@ -1,42 +1,8 @@
-/* Reset default margin and padding */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+@import url('https://fonts.googleapis.com/css27?family=Sora&display=swap');
 
-/* Style the container */
-.container {
-  width: 100%;
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
-/* Style the header */
-header {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-/* Style the main content */
-main {
-  text-align: center;
-}
-
-.card {
-  margin-top: 20px;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #f9f9f9;
-}
-
-/* Style the footer */
-footer {
-  text-align: center;
-  margin-top: 20px;
-  padding: 10px 0;
-  background-color: #333;
-  color: #fff;
+*{
+    font-family: 'Sora', sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
