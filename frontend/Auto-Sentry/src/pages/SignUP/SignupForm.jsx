@@ -1,6 +1,7 @@
 // SignupForm.js
 import React from 'react';
 import './SignupForm';
+import { Link } from 'react-router-dom';
 import { FaUser } from 'react-icons/fa';
 import { FaLock } from 'react-icons/fa';
 
@@ -24,7 +25,7 @@ const SignupForm = () => {
           </div>
           <button type='submit'>Sign Up</button>
           <div className="register-link">
-            <p>Already have an account? <a href='#'>Login</a></p>
+            <p>Already have an account?  <Link to="/signin">Login</Link></p>
           </div>
         </form>
       </div>
