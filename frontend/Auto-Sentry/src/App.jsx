@@ -6,8 +6,8 @@ import Home from './pages/Home/Home';
 import About from './pages/About/About';
 import Services from './pages/Services/Services';
 import Contact from './pages/Contact/Contact';
-import SignUp from './pages/SignUP/SignUP';
-import SignIN from './pages/SignIn/SignIN'
+import SignUp from './pages/SignUP/SignupForm';
+import SignIN from './pages/Login/LoginForm'
 
 function App() {
   return (

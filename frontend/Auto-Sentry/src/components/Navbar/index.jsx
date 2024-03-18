@@ -1,8 +1,8 @@
 import React from 'react';
-import './Navbar.css'; // Import the CSS file
+import './Navbar.css';
 import { NavLink } from 'react-router-dom';
 import { FaBars } from 'react-icons/fa';
-import logoImg from '../../assets/AutoSentry_transparent.png'
+// import logoImg from '../../assets/AutoSentry_transparent.png'
 
 const Navbar = () => {
   return (
