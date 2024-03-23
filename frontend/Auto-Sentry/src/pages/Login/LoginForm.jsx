@@ -24,6 +24,7 @@ const LoginForm = () => {
           <a href='#'>Forgot password</a>
         </div>
         <button type='submit'>Login</button>
+        <button type='submit'>Login with Auth0</button>
         <div className="register-link">
           <p>Don't have an account? <Link to="/sign-up">Register</Link></p>
         </div>
