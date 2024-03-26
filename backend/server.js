@@ -1,11 +1,12 @@
-// app.js
-
 const express = require('express');
-const bodyParser = require('body-parser'); // Require body-parser
+const bodyParser = require('body-parser'); 
 const mongoose = require('mongoose');
 const Vehicle = require('./models/vehicles.model');
+const cors = require('cors');
 
 const app = express();
+
+app.use(cors());
 
 app.use(bodyParser.json()); 
 app.use(express.static('website'));
@@ -16,11 +17,20 @@ function welcome(req, res) {
     res.send("Welcome to my Capstone project!");
 }
 
+app.get('/api/vehicles', async (req, res) => {
+    try {
+        const vehicles = await Vehicle.find({});
+        res.status(200).json(vehicles)
+    }catch{
+        res.status(500).json({message: error.message});
+    }
+}) 
+
 app.post('/api/vehicles', async (req, res) => {
     try {
         const vehicle = await Vehicle.create(req.body);
         console.log('Vehicle created:', vehicle);
-        res.status(201).json(vehicle); // Use status 201 for successful creation
+        res.status(201).json(vehicle); 
     } catch (error) {
         console.error('Error creating vehicle:', error);
         res.status(500).json({ message: error.message });

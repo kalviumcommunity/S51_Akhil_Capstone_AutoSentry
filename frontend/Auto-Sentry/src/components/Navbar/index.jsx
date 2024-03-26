@@ -3,6 +3,8 @@ import './Navbar.css';
 import { NavLink } from 'react-router-dom';
 import { FaBars } from 'react-icons/fa';
 import { useAuth0 } from '@auth0/auth0-react';
+import { IoCarSharp } from "react-icons/io5";
+import { RiAccountCircleFill } from "react-icons/ri";
 
 const Navbar = () => {
   const { user, loginWithRedirect, isAuthenticated, logout } = useAuth0();
@@ -33,19 +35,33 @@ const Navbar = () => {
       </div>
       <div className="auth0">
         {isAuthenticated && (
-          <div className="user-info">
-            <img src={user.picture} alt={user.name} className="user-avatar" />
-            <h3>{user.name}</h3>
+          <div className="my-garage">
+            <IoCarSharp />
+            <NavLink to="/garage" className="nav-link" activeClassName="active">
+              MY GARAGE
+            </NavLink>
+          </div>
+        )}
+        {isAuthenticated && (
+          <div className="my-account">
+            <RiAccountCircleFill />
+            <NavLink to="/about" className="nav-link" activeClassName="active">
+              MY ACCOUNT
+            </NavLink>
           </div>
         )}
       </div>
-      <div className="nav-btn">
+      {/* <div className="nav-btn">
         {isAuthenticated ? (
           <button className="nav-btn-link" onClick={() => logout()}>Logout</button>
         ) : (
           <button className="nav-btn-link" onClick={() => loginWithRedirect()}>Login</button>
         )}
-      </div>
+      </div> */}
+      {!isAuthenticated && (
+          <button className="nav-btn-link" onClick={() => loginWithRedirect()}>Login</button>
+        )}
+
     </nav>
   );
 }

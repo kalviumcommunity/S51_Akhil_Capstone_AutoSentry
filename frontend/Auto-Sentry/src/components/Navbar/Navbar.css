@@ -98,7 +98,8 @@
     color: blue; /* Change to your active color */
   }
 
-  .user-info{
+  .my-garage,.my-account{
     display: flex;
     align-items: center;
+    margin: 10px;
   }
