@@ -1,5 +1,3 @@
-// vehicle.model.js
-
 const mongoose = require("mongoose");
 
 const VehicleSchema = mongoose.Schema(
