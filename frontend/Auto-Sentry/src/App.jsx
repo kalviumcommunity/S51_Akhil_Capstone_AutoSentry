@@ -9,6 +9,7 @@ import Contact from './pages/Contact/Contact';
 import SignUp from './pages/SignUP/SignupForm';
 import SignIN from './pages/Login/LoginForm'
 import Garage from './pages/Garage/Garage';
+import Addnew from './components/Add New/addnew'
 
 function App() {
   return (
@@ -22,9 +23,10 @@ function App() {
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/signin" element={<SignIN />} />
         <Route path="/garage" element={<Garage />} />
+        <Route path="/addnew" element={<Addnew />} />
       </Routes>
     </Router>
-  );
+  ); 
 }
 
 export default App;

@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const Vehicle = require('./models/vehicles.model');
 const cors = require('cors');
+const { error } = require('console');
 
 const app = express();
 
@@ -33,6 +34,23 @@ app.post('/api/vehicles', async (req, res) => {
         res.status(201).json(vehicle); 
     } catch (error) {
         console.error('Error creating vehicle:', error);
+        res.status(500).json({ message: error.message });
+    }
+});
+
+
+app.put('/api/vehicles/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const vehicle = await Vehicle.findByIdAndUpdate(id, req.body, { new: true });
+
+        if (!vehicle) {
+            return res.status(404).json({ message: "Vehicle not found" });
+        }
+
+        res.status(200).json(vehicle);
+    } catch (error) {
+        console.error('Error updating vehicle:', error);
         res.status(500).json({ message: error.message });
     }
 });

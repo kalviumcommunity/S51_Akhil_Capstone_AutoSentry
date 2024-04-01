@@ -3,7 +3,7 @@ import axios from 'axios';
 import { NavLink } from 'react-router-dom';
 import { FaPlus } from "react-icons/fa";
 import { useAuth0 } from '@auth0/auth0-react';
-import './Garage.css'; // Import your CSS file
+import './Garage.css'; 
 
 const Garage = () => {
   const [vehicles, setVehicles] = useState([]);
@@ -14,17 +14,16 @@ const Garage = () => {
 
   useEffect(() => {
     if(user && user.nickname) {
-      // Fetch data from the API when the component mounts
       axios.get('http://localhost:5000/api/vehicles')
         .then(response => {
           const userVehicles = response.data.filter(vehicle => vehicle.user === user.nickname);
-          setVehicles(userVehicles); // Set the fetched data to the state
+          setVehicles(userVehicles); 
         })
         .catch(error => {
           console.error('Error fetching data:', error);
         });
     }
-  }, [user]); // Dependency array includes user to refetch when it changes
+  }, [user]);
 
   return (
     <div className="garage-container">
@@ -40,7 +39,7 @@ const Garage = () => {
             </div>
           </div>
         ))}
-        <NavLink to="/services" className="addnew" activeClassName="active">
+        <NavLink to="/addnew" className="addnew" activeClassName="active">
             <FaPlus />
             <h2>Add New Car</h2>
         </NavLink>
