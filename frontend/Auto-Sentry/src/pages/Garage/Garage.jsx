@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { NavLink } from 'react-router-dom';
-import { FaPlus } from "react-icons/fa";
-import { FaPen } from "react-icons/fa6";
+import { FaPlus, FaPen } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { useAuth0 } from '@auth0/auth0-react';
 import './Garage.css'; 
 
 const Garage = () => {
   const [vehicles, setVehicles] = useState([]);
-
   const { user } = useAuth0();
 
   console.log("Current User's Nickname", user.nickname);
@@ -27,12 +25,14 @@ const Garage = () => {
     }
   }, [user]);
 
-  const handleDelete = (id) =>{
+  const handleDelete = (id) => {
     axios.delete('http://localhost:5000/api/vehicles/deleteVehicle/'+id)
-    .then(res => {console.log(res)
-      // window.location.reload()
-    })
-    .catch(err => console.log(err))
+      .then(res => {
+        console.log(res);
+        // Filter out the deleted vehicle from the state
+        setVehicles(prevVehicles => prevVehicles.filter(vehicle => vehicle._id !== id));
+      })
+      .catch(err => console.log(err))
   }
 
   return (
@@ -54,8 +54,8 @@ const Garage = () => {
           </div>
         ))}
         <NavLink to="/addnew" className="addnew" activeClassName="active">
-            <FaPlus />
-            <h2>Add New Car</h2>
+          <FaPlus />
+          <h2>Add New Car</h2>
         </NavLink>
       </div>
     </div>
