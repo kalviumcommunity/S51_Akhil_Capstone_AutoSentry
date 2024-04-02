@@ -18,42 +18,63 @@ function welcome(req, res) {
     res.send("Welcome to my Capstone project!");
 }
 
-app.get('/api/vehicles', async (req, res) => {
-    try {
-        const vehicles = await Vehicle.find({});
-        res.status(200).json(vehicles)
-    }catch{
-        res.status(500).json({message: error.message});
-    }
-}) 
+app.get('/api/vehicles', (req, res) => {
+    Vehicle.find({})
+      .then(vehicles => {
+        res.status(200).json(vehicles);
+      })
+      .catch(error => {
+        res.status(500).json({ message: error.message });
+      });
+  });
 
-app.post('/api/vehicles', async (req, res) => {
-    try {
-        const vehicle = await Vehicle.create(req.body);
+app.get('/api/vehicles/:id', (req, res) => {
+    const id = req.params.id;
+    Vehicle.findById(id)
+      .then(vehicle => {
+        if (!vehicle) {
+          return res.status(404).json({ message: "Vehicle not found" });
+        }
+        res.status(200).json(vehicle);
+      })
+      .catch(error => {
+        res.status(500).json({ message: error.message });
+      });
+  });
+
+app.post('/api/vehicles', (req, res) => {
+    Vehicle.create(req.body)
+      .then(vehicle => {
         console.log('Vehicle created:', vehicle);
-        res.status(201).json(vehicle); 
-    } catch (error) {
+        res.status(201).json(vehicle);
+      })
+      .catch(error => {
         console.error('Error creating vehicle:', error);
         res.status(500).json({ message: error.message });
-    }
-});
+      });
+  });
 
-
-app.put('/api/vehicles/:id', async (req, res) => {
-    try {
-        const { id } = req.params;
-        const vehicle = await Vehicle.findByIdAndUpdate(id, req.body, { new: true });
-
-        if (!vehicle) {
-            return res.status(404).json({ message: "Vehicle not found" });
-        }
-
-        res.status(200).json(vehicle);
-    } catch (error) {
-        console.error('Error updating vehicle:', error);
+app.put('/api/vehicles/updateVehicle/:id',(req, res)=>{
+    const id = req.params.id;
+    Vehicle.findByIdAndUpdate({_id:id}, {user: req.body.user, make: req.body.make, model: req.body.model, year: req.body.year, modification: req.body.modification, image: req.body.image})
+    .then(vehicles => {
+        res.status(200).json(vehicles);
+      })
+      .catch(error => {
         res.status(500).json({ message: error.message });
-    }
-});
+      });
+})
+
+app.delete('/api/vehicles/deleteVehicle/:id',(req,res)=>{
+    const id = req.params.id;
+    Vehicle.findByIdAndDelete({_id:id})
+    .then(vehicles => {
+        res.status(200).json(vehicles);
+      })
+      .catch(error => {
+        res.status(500).json({ message: error.message });
+      });
+})
 
 mongoose.connect("mongodb+srv://akhilk49:iamtheadmin@cluster0.jngvggm.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
     .then(() => {

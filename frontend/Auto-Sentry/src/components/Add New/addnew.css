@@ -1,29 +1,40 @@
-/* AddNew.css */
+/* styles.css */
 
 .form-container {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .input-field {
-    width: 100%;
-    margin-bottom: 10px;
-    padding: 8px;
-  }
-  
-  .button {
-    width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .button:hover {
-    background-color: #0056b3;
-  }
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #007bff; /* Primary color */
+}
+
+.form-content {
+  width: 50%;
+  background-color: #ffffff; /* White color */
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-label {
+  font-weight: bold;
+}
+
+.form-control {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ced4da; /* Bootstrap default border color */
+  border-radius: 5px;
+}
+
+.btn-submit {
+  background-color: #28a745; /* Success color */
+  color: #ffffff; /* White text color */
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}

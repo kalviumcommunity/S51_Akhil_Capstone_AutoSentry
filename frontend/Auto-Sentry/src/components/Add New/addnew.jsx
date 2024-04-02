@@ -1,113 +1,72 @@
-// AddNew.jsx
 
 import React, { useState } from 'react';
+import './addnew.css';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom'; 
-import './addnew.css'; 
+import { useNavigate } from 'react-router-dom';
 
 const AddNew = () => {
-  const [formData, setFormData] = useState({
-    user: '',
-    make: '',
-    model: '',
-    year: 0,
-    modification: '',
-    vin: 0,
-    image: '',
-  });
-
-  const navigate = useNavigate();
-
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = async (e) => {
+  const [user, setUser] = useState()
+  const [make, setMake] = useState()
+  const [model, setModel] = useState()
+  const [year, setYear] = useState()
+  const [modification, setModification] = useState()
+  const [vin, setVin] = useState()
+  const [image, setImage] = useState()
+  const navigate = useNavigate()
+  
+  const Submit = (e) => {
     e.preventDefault();
-    try {
-      const res = await axios.post('http://localhost:5000/api/vehicles', formData);
-      console.log(res.data); // Handle success response
-      navigate('/garage');
-    } catch (error) {
-      console.error('Error adding new vehicle:', error);
-    }
-  };
-
+    axios.post("http://localhost:5000/api/vehicles",{user,make,model,year,modification,vin,image})
+    .then(result => {
+      console.log(result)
+      navigate('/garage')
+    })
+    .catch(err => console.log(err))
+  }
+  
   return (
-    <div className="form-container">
-      <h2>Add New Vehicle</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="user"
-          className="input-field"
-          placeholder="User"
-          value={formData.user}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="text"
-          name="make"
-          className="input-field"
-          placeholder="Make"
-          value={formData.make}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="text"
-          name="model"
-          className="input-field"
-          placeholder="Model"
-          value={formData.model}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="number"
-          name="year"
-          className="input-field"
-          placeholder="Year"
-          value={formData.year}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="text"
-          name="modification"
-          className="input-field"
-          placeholder="Modification"
-          value={formData.modification}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="number"
-          name="vin"
-          className="input-field"
-          placeholder="VIN"
-          value={formData.vin}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="text"
-          name="image"
-          className="input-field"
-          placeholder="Image URL"
-          value={formData.image}
-          onChange={handleChange}
-        />
-        <button type="submit" className="button">
-          Add Vehicle 
-        </button>
-      </form>
+    <div className='form-container'> 
+      <div className='form-content'>
+        <form onSubmit={Submit}>
+          <h2>Add Vehicle</h2>
+          <div className='form-group'>
+            <label className='form-label' htmlFor='user'>User:</label>
+            <input type='text' placeholder='Enter User Name' className='form-control'
+            onChange={(e) => setUser(e.target.value)}/>
+          </div>
+          <div className='form-group'>
+            <label className='form-label' htmlFor='make'>Make:</label>
+            <input type='text' placeholder='Enter Make' className='form-control'
+            onChange={(e) => setMake(e.target.value)}/>
+          </div>
+          <div className='form-group'>
+            <label className='form-label' htmlFor='model'>Model:</label>
+            <input type='text' placeholder='Enter Model' className='form-control'
+            onChange={(e) => setModel(e.target.value)}/>
+          </div>
+          <div className='form-group'>
+            <label className='form-label' htmlFor='year'>Year:</label>
+            <input type='number' placeholder='Enter the Year' className='form-control'
+            onChange={(e) => setYear(e.target.value)}/>
+          </div>
+          <div className='form-group'>
+            <label className='form-label' htmlFor='modification'>Modification:</label>
+            <input type='text' placeholder='Enter the Modification' className='form-control'
+            onChange={(e) => setModification(e.target.value)}/>
+          </div>
+          <div className='form-group'>
+            <label className='form-label' htmlFor='vin'>VIN:</label>
+            <input type='number' placeholder='Enter the VIN' className='form-control'
+            onChange={(e) => setVin(e.target.value)}/>
+          </div>
+          <div className='form-group'>
+            <label className='form-label' htmlFor='image'>Image URL:</label>
+            <input type='text' placeholder='Paste the Vehicle Image URL' className='form-control'
+            onChange={(e) => setImage(e.target.value)}/>
+          </div>
+          <button className='btn-submit'>Submit</button>
+        </form>
+      </div>
     </div>
   );
 };
