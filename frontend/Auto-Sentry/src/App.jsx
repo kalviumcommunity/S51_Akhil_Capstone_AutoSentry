@@ -10,6 +10,7 @@ import SignUp from './pages/SignUP/SignupForm';
 import SignIN from './pages/Login/LoginForm'
 import Garage from './pages/Garage/Garage';
 import Addnew from './components/Add New/addnew'
+import UpdateVehicle from './components/Update Vehicle/updateVehicle';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/signin" element={<SignIN />} />
         <Route path="/garage" element={<Garage />} />
         <Route path="/addnew" element={<Addnew />} />
+        <Route path='/update/:id' element={<UpdateVehicle />}/>
       </Routes>
     </Router>
   ); 
