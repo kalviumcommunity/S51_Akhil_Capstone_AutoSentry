@@ -1,8 +1,9 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import "./updateVehicle.css";
+import { ToastContainer, toast } from "react-toastify";
 
 const updateVehicle = () => {
   const { id } = useParams();
@@ -16,47 +17,49 @@ const updateVehicle = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-      axios.get('http://localhost:5000/api/vehicles/'+id)
-      .then(result => {console.log(result)
-        setUser(result.data.user)
-        setMake(result.data.make)
-        setModel(result.data.model)
-        setYear(result.data.year)
-        setModification(result.data.modification)
-        setVin(result.data.vin)
-        setImage(result.data.image)
-    })
-      .catch(error => console.log(error))
-    }, []);
-  
-    const Update = (e) => {
-        e.preventDefault();
-        axios.put("http://localhost:5000/api/vehicles/updateVehicle/"+id,{user,make,model,year,modification,vin,image})
-        .then(result => {
-          console.log(result)
-          navigate('/garage')
-        })
-        .catch(err => console.log(err))
-    
-      }
+    axios
+      .get("http://localhost:5000/api/vehicles/" + id)
+      .then((result) => {
+        console.log(result);
+        setUser(result.data.user);
+        setMake(result.data.make);
+        setModel(result.data.model);
+        setYear(result.data.year);
+        setModification(result.data.modification);
+        setVin(result.data.vin);
+        setImage(result.data.image);
+      })
+      .catch((error) => console.log(error));
+  }, []);
+
+  const Update = (e) => {
+    e.preventDefault();
+    axios
+      .put("http://localhost:5000/api/vehicles/updateVehicle/" + id, {
+        user,
+        make,
+        model,
+        year,
+        modification,
+        vin,
+        image,
+      })
+      .then((result) => {
+        console.log(result);
+        toast.success("Vehicle Updated Successfully");
+        setTimeout(() => {
+          navigate("/garage");
+        }, 1000);
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <div className="form-container">
+      <ToastContainer />
       <div className="form-content">
-        <form onSubmit={Update} >
+        <form onSubmit={Update}>
           <h2>Update Vehicle Details</h2>
-          <div className="form-group">
-            <label className="form-label" htmlFor="user">
-              User:
-            </label>
-            <input
-              type="text"
-              placeholder="Enter User Name"
-              className="form-control"
-              value={user}
-              onChange={(e) => setUser(e.target.value)}
-            />
-          </div>
           <div className="form-group">
             <label className="form-label" htmlFor="make">
               Make:

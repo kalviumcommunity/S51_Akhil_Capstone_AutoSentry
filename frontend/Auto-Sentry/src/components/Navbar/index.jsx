@@ -5,6 +5,7 @@ import { FaBars } from 'react-icons/fa';
 import { useAuth0 } from '@auth0/auth0-react';
 import { IoCarSharp } from "react-icons/io5";
 import { RiAccountCircleFill } from "react-icons/ri";
+import { ToastContainer } from 'react-toastify';
 
 const Navbar = () => {
   const { user, loginWithRedirect, isAuthenticated, logout } = useAuth0();
@@ -13,6 +14,7 @@ const Navbar = () => {
 
   return (
     <nav className="nav">
+      <ToastContainer />
       <NavLink to="/" className="nav-link">
         <h1>AutoSentry</h1>
       </NavLink>

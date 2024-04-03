@@ -1,11 +1,13 @@
-
 import React, { useState } from 'react';
 import './addnew.css';
 import axios from 'axios';
+import { useAuth0 } from '@auth0/auth0-react';
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer,toast } from 'react-toastify';
 
 const AddNew = () => {
-  const [user, setUser] = useState()
+  const { user } = useAuth0();
+  const [username, setUsername] = useState(user.nickname);
   const [make, setMake] = useState()
   const [model, setModel] = useState()
   const [year, setYear] = useState()
@@ -13,27 +15,34 @@ const AddNew = () => {
   const [vin, setVin] = useState()
   const [image, setImage] = useState()
   const navigate = useNavigate()
+
+  console.log("Current User's Nickname", user.nickname);
   
   const Submit = (e) => {
     e.preventDefault();
-    axios.post("http://localhost:5000/api/vehicles",{user,make,model,year,modification,vin,image})
+    axios.post("http://localhost:5000/api/vehicles",{user: username,make,model,year,modification,vin,image})
     .then(result => {
       console.log(result)
-      navigate('/garage')
+      toast.success("Vehicle Created Successfully");
+      setTimeout(() => {
+        navigate("/garage");
+      }, 1000);
     })
     .catch(err => console.log(err))
   }
   
   return (
+
     <div className='form-container'> 
+    <ToastContainer />
       <div className='form-content'>
         <form onSubmit={Submit}>
           <h2>Add Vehicle</h2>
-          <div className='form-group'>
-            <label className='form-label' htmlFor='user'>User:</label>
-            <input type='text' placeholder='Enter User Name' className='form-control'
-            onChange={(e) => setUser(e.target.value)}/>
-          </div>
+          {/* <div className='form-group'>
+            <label className='form-label' htmlFor='username'>Username:</label>
+            <input type='text'placeholder='Enter Username'className='form-control'value={username}
+              onChange={(e) => setUsername(e.target.value)}/>
+          </div> */}
           <div className='form-group'>
             <label className='form-label' htmlFor='make'>Make:</label>
             <input type='text' placeholder='Enter Make' className='form-control'

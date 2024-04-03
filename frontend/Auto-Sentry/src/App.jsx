@@ -12,6 +12,11 @@ import Garage from './pages/Garage/Garage';
 import Addnew from './components/Add New/addnew'
 import UpdateVehicle from './components/Update Vehicle/updateVehicle';
 
+
+import { ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 function App() {
   return (
     <Router>
@@ -32,3 +37,4 @@ function App() {
 }
 
 export default App;
+

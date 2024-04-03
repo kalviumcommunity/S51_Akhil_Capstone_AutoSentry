@@ -1,45 +1,52 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { NavLink } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { NavLink } from "react-router-dom";
 import { FaPlus, FaPen } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
-import { useAuth0 } from '@auth0/auth0-react';
-import './Garage.css'; 
+import { useAuth0 } from "@auth0/auth0-react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "./Garage.css";
 
 const Garage = () => {
   const [vehicles, setVehicles] = useState([]);
   const { user } = useAuth0();
 
-  console.log("Current User's Nickname", user.nickname);
-
   useEffect(() => {
-    if(user && user.nickname) {
-      axios.get('http://localhost:5000/api/vehicles')
-        .then(response => {
-          const userVehicles = response.data.filter(vehicle => vehicle.user === user.nickname);
-          setVehicles(userVehicles); 
+    if (user && user.nickname) {
+      axios
+        .get("http://localhost:5000/api/vehicles")
+        .then((response) => {
+          const userVehicles = response.data.filter(
+            (vehicle) => vehicle.user === user.nickname
+          );
+          setVehicles(userVehicles);
         })
-        .catch(error => {
-          console.error('Error fetching data:', error);
+        .catch((error) => {
+          console.error("Error fetching data:", error);
         });
     }
   }, [user]);
 
   const handleDelete = (id) => {
-    axios.delete('http://localhost:5000/api/vehicles/deleteVehicle/'+id)
-      .then(res => {
+    axios
+      .delete(`http://localhost:5000/api/vehicles/deleteVehicle/${id}`)
+      .then((res) => {
         console.log(res);
-        // Filter out the deleted vehicle from the state
-        setVehicles(prevVehicles => prevVehicles.filter(vehicle => vehicle._id !== id));
+        toast.success("Vehicle Deleted Successfully");
+        setVehicles((prevVehicles) =>
+          prevVehicles.filter((vehicle) => vehicle._id !== id)
+        );
       })
-      .catch(err => console.log(err))
-  }
+      .catch((err) => console.log(err));
+  };
 
   return (
     <div className="garage-container">
       <h1>My Garage</h1>
+      <ToastContainer />
       <div className="vehicle-list">
-        {vehicles.map(vehicle => (
+        {vehicles.map((vehicle) => (
           <div key={vehicle._id} className="vehicle-card">
             <img src={vehicle.image} alt="Vehicle" />
             <div className="vehicle-details">
@@ -58,6 +65,7 @@ const Garage = () => {
           <h2>Add New Car</h2>
         </NavLink>
       </div>
+      <ToastContainer />
     </div>
   );
 };
