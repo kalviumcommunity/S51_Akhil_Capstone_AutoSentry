@@ -53,10 +53,26 @@ const Garage = () => {
               <h3>{vehicle.make} {vehicle.model}</h3>
               <p>Year: {vehicle.year}</p>
               <p>Modification: {vehicle.modification}</p>
-              <NavLink to={`/update/${vehicle._id}`} className="update" activeClassName="active">
-                <FaPen />
-              </NavLink>
-              <a className='btn-danger' onClick={(e)=>handleDelete(vehicle._id)}><MdDelete /></a>
+              <div className="control-btns">
+                <NavLink to={`/update/${vehicle._id}`} className="update" activeClassName="active">
+                  <FaPen />
+                </NavLink>
+                <a className='btn-danger' onClick={(e)=>handleDelete(vehicle._id)}><MdDelete /></a>
+              </div>
+              <div className="activ-btns">
+                <NavLink to={`/maintenancetasks`} >
+                  <button className="btn-mt">Maintenance tasks</button>
+                </NavLink>
+                <NavLink to={`/update/${vehicle._id}`} >
+                  <button className="btn-mt">Empty</button>
+                </NavLink>
+                <NavLink to={`/update/${vehicle._id}`} >
+                  <button className="btn-mt">Empty</button>
+                </NavLink>
+                <NavLink to={`/update/${vehicle._id}`}>
+                  <button className="btn-mt">Maintenance tasks</button>
+                </NavLink>
+              </div>
             </div>
           </div>
         ))}
