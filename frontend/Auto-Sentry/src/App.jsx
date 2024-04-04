@@ -15,6 +15,7 @@ import UpdateVehicle from './components/Update Vehicle/updateVehicle';
 
 import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Maintenancetasks from './pages/Maintenance Tasks/Maintenancetasks';
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
         <Route path="/garage" element={<Garage />} />
         <Route path="/addnew" element={<Addnew />} />
         <Route path='/update/:id' element={<UpdateVehicle />}/>
+        <Route path='/maintenancetasks' element={<Maintenancetasks />} />
       </Routes>
     </Router>
   ); 
