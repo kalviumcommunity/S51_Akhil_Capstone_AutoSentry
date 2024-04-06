@@ -27,9 +27,9 @@ const VehicleSchema = mongoose.Schema(
       required: true,
     },
     image: {
-      type: String,
-      required: false,
-    },
+      data: Buffer, 
+      contentType: String,
+    }
   },
   {
     timestamps: true,
