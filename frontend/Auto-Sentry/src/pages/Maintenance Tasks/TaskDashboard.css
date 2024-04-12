@@ -1,0 +1,50 @@
+.container {
+  padding: 2rem;
+}
+
+.task-input-section {
+  display: flex;
+  gap: 0.5rem;
+  align-items:flex-end;
+  font-family: Arial, sans-serif;
+  
+}
+
+.task-input .input-field,
+.priority-select .select-field,
+.date-input .input-field,
+.description-input .input-field {
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+}
+
+.submit-button {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  color: #fff;
+  background-color: #6c757d;
+  border-radius: 0.25rem;
+  text-decoration: none;
+}
+
+.task-list-section {
+  margin-top: 2rem;
+  color: #000;
+}
+
+.task-list-grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+@media (min-width: 768px) {
+  .task-list-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.task-list-grid {
+  gap: 1rem;
+}
