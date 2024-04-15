@@ -2,16 +2,34 @@ const express = require('express');
 const bodyParser = require('body-parser'); 
 const mongoose = require('mongoose');
 const Vehicle = require('./models/vehicles.model');
+const MaintenanceTask = require('./models/tasks.model')
 const cors = require('cors');
-const { error } = require('console');
 
 const app = express();
 
 app.use(cors());
-
 app.use(bodyParser.json()); 
 app.use(express.static('website'));
 
+// First Database Connection
+mongoose.connect("mongodb+srv://akhilk49:iamtheadmin@cluster0.jngvggm.mongodb.net/test?retryWrites=true&w=majority&appName=Cluster0")
+  .then(() => {
+    console.log("Connected to First Database!");
+    startServer();
+  })
+  .catch((err) => {
+    console.error("First Database Connection failed:", err);
+  });
+
+// Second Database Connection
+const secondDBConnection = mongoose.createConnection("mongodb+srv://akhilk49:iamtheadmin@cluster0.jngvggm.mongodb.net/tasks?retryWrites=true&w=majority&appName=Cluster0", { useNewUrlParser: true });
+
+secondDBConnection.on('error', console.error.bind(console, 'Second Database Connection Error:'));
+secondDBConnection.once('open', function () {
+  console.log('Connected to Second Database!');
+});
+
+// Routes for First Database
 app.get('/', welcome);
 
 function welcome(req, res) {
@@ -26,7 +44,7 @@ app.get('/api/vehicles', (req, res) => {
       .catch(error => {
         res.status(500).json({ message: error.message });
       });
-  });
+});
 
 app.get('/api/vehicles/:id', (req, res) => {
     const id = req.params.id;
@@ -40,7 +58,7 @@ app.get('/api/vehicles/:id', (req, res) => {
       .catch(error => {
         res.status(500).json({ message: error.message });
       });
-  });
+});
 
 app.post('/api/vehicles', (req, res) => {
     Vehicle.create(req.body)
@@ -52,7 +70,7 @@ app.post('/api/vehicles', (req, res) => {
         console.error('Error creating vehicle:', error);
         res.status(500).json({ message: error.message });
       });
-  });
+});
 
 app.put('/api/vehicles/updateVehicle/:id',(req, res)=>{
     const id = req.params.id;
@@ -63,7 +81,7 @@ app.put('/api/vehicles/updateVehicle/:id',(req, res)=>{
       .catch(error => {
         res.status(500).json({ message: error.message });
       });
-})
+});
 
 app.delete('/api/vehicles/deleteVehicle/:id',(req,res)=>{
     const id = req.params.id;
@@ -74,17 +92,10 @@ app.delete('/api/vehicles/deleteVehicle/:id',(req,res)=>{
       .catch(error => {
         res.status(500).json({ message: error.message });
       });
-})
+});
 
-mongoose.connect("mongodb+srv://akhilk49:iamtheadmin@cluster0.jngvggm.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
-    .then(() => {
-        console.log("Connected to Database!");
-        var server = app.listen(5000, starting);
-
-        function starting() {
-            console.log("Server started");
-        }
-    })
-    .catch((err) => {
-        console.error("Connection failed:", err);
+function startServer() {
+    var server = app.listen(5000, () => {
+        console.log("Server started");
     });
+}
