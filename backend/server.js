@@ -30,26 +30,31 @@ secondDBConnection.once('open', function () {
   
   // Routes for Second Database (Maintenance Tasks)
   app.get('/api/tasks', (req, res) => {
-      MaintenanceTask.find({})
-        .then(tasks => {
-          res.status(200).json(tasks);
-        })
-        .catch(error => {
-          res.status(500).json({ message: error.message });
-        });
-  });
+    MaintenanceTask.find({})
+      .then(tasks => {
+        res.status(200).json(tasks);
+      })
+      .catch(error => {
+        console.error('Error fetching maintenance tasks:', error);
+        res.status(500).json({ message: 'Internal server error' });
+      });
+});
 
-  app.post('/api/tasks', (req, res) => {
-      MaintenanceTask.create(req.body)
-        .then(task => {
-          console.log('Maintenance Task created:', task);
-          res.status(201).json(task);
-        })
-        .catch(error => {
-          console.error('Error creating maintenance task:', error);
-          res.status(500).json({ message: error.message });
-        });
-  });
+app.post('/api/tasks', (req, res) => {
+    MaintenanceTask.create(req.body)
+      .then(task => {
+        console.log('Maintenance Task created:', task);
+        res.status(201).json(task);
+      })
+      .catch(error => {
+        console.error('Error creating maintenance task:', error);
+        if (error.name === 'ValidationError') {
+          res.status(400).json({ message: error.message });
+        } else {
+          res.status(500).json({ message: 'Internal server error' });
+        }
+      });
+});
 });
 
 // Routes for First Database
