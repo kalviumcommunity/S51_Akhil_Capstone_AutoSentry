@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Layout from "./Layout";
+import Layout from "../Layout/Layout";
 import "./TaskDashboard.css";
 
 const TaskDashboard = () => {
@@ -84,7 +84,7 @@ const TaskDashboard = () => {
 
   return (
     <div className="container">
-        <h1>Add Maintenance Tasks</h1>
+        <h2>Add Maintenance Tasks</h2>
       <div className="task-input-section">
         <div className="task-input">
         <h4>Task:</h4>

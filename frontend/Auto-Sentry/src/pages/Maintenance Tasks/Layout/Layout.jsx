@@ -1,5 +1,5 @@
 import React from "react";
-import Action from "./Action";
+import Action from "../Action/Action";
 import './Layout.css'; 
 
 function Layout(props) {
