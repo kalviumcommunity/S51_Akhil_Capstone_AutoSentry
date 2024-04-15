@@ -4,10 +4,7 @@ import axios from 'axios';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer,toast } from 'react-toastify';
-import {storage} from "../../firebase"
-import {ref,uploadBytes} from "firebase/storage"
-import {v4} from "uuid";
- 
+
 const AddNew = () => {
   const { user } = useAuth0();
   const [username, setUsername] = useState(user.nickname);
@@ -32,14 +29,6 @@ const AddNew = () => {
       }, 1000);
     })
     .catch(err => console.log(err))
-  }
-
-  const uploadImage = () =>{
-    if(image == null) return;
-    const imageRef = ref(storage, `vehicleimages/${image.name + v4() }`);
-    uploadBytes(imageRef, image).then(()=>{
-      alert("Image uploaded")
-    })
   }
   
   return (
@@ -81,10 +70,10 @@ const AddNew = () => {
           </div>
           <div className='form-group'>
             <label className='form-label' htmlFor='image'>Image URL:</label>
-            <input type='file' placeholder='Paste the Vehicle Image URL' className='form-control'
-            onChange={(e) => setImage(e.target.files[0])}/>
+            <input type='text' placeholder='Paste the Vehicle Image URL' className='form-control'
+            onChange={(e) => setImage(e.target.value)}/>
           </div>
-          <button className='btn-submit' onClick={uploadImage}>Submit</button>
+          <button className='btn-submit'>Submit</button>
         </form>
       </div>
     </div>

@@ -27,6 +27,29 @@ const secondDBConnection = mongoose.createConnection("mongodb+srv://akhilk49:iam
 secondDBConnection.on('error', console.error.bind(console, 'Second Database Connection Error:'));
 secondDBConnection.once('open', function () {
   console.log('Connected to Second Database!');
+  
+  // Routes for Second Database (Maintenance Tasks)
+  app.get('/api/tasks', (req, res) => {
+      MaintenanceTask.find({})
+        .then(tasks => {
+          res.status(200).json(tasks);
+        })
+        .catch(error => {
+          res.status(500).json({ message: error.message });
+        });
+  });
+
+  app.post('/api/tasks', (req, res) => {
+      MaintenanceTask.create(req.body)
+        .then(task => {
+          console.log('Maintenance Task created:', task);
+          res.status(201).json(task);
+        })
+        .catch(error => {
+          console.error('Error creating maintenance task:', error);
+          res.status(500).json({ message: error.message });
+        });
+  });
 });
 
 // Routes for First Database
