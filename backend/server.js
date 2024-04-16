@@ -21,14 +21,13 @@ mongoose.connect("mongodb+srv://akhilk49:iamtheadmin@cluster0.jngvggm.mongodb.ne
     console.error("First Database Connection failed:", err);
   });
 
-// Second Database Connection
+// Task Database Connection
 const secondDBConnection = mongoose.createConnection("mongodb+srv://akhilk49:iamtheadmin@cluster0.jngvggm.mongodb.net/tasks?retryWrites=true&w=majority&appName=Cluster0", { useNewUrlParser: true });
 
 secondDBConnection.on('error', console.error.bind(console, 'Second Database Connection Error:'));
 secondDBConnection.once('open', function () {
   console.log('Connected to Second Database!');
-  
-  // Routes for Second Database (Maintenance Tasks)
+
   app.get('/api/tasks', (req, res) => {
     MaintenanceTask.find({})
       .then(tasks => {
@@ -57,7 +56,7 @@ app.post('/api/tasks', (req, res) => {
 });
 });
 
-// Routes for First Database
+// Routes for Vehicle DB Database
 app.get('/', welcome);
 
 function welcome(req, res) {
