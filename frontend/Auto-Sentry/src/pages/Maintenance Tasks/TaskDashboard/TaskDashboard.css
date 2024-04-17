@@ -1,6 +1,8 @@
 .parenttask{
   border: 1px solid red;
   text-align: center;
+  border: none;
+
 }
 .task-dashboardpar{
   display: flex;
@@ -8,12 +10,12 @@
   align-items:flex-start;
 }
 .task-dashboardpar h2{
-  padding: 30px 0px 10px 20px ;
+  padding: 30px 0px 10px 45px ;
 }
 
 .task-dashboard {
+  margin-left: 25px;
   display: flex;
-  border: 1px solid black;
   flex-direction:row;
   align-items: center;
   justify-content: center;
@@ -44,4 +46,22 @@
 
 .task-dashboard button:hover {
   background-color: #45a049;
+}
+
+.pending{
+  text-align: start;
+  margin: 2% 0% 1% 45px;
+  font-size: x-large;
+}
+.highpriority,.midpriority,.lowpriority{
+  background-color: #79cd7d;  min-width: 30%;
+  min-height: 30vh;
+  font-size: larger;
+  font-weight: 700;
+}
+.block{
+  display: flex;
+  justify-content: space-evenly;
+  
+
 }
