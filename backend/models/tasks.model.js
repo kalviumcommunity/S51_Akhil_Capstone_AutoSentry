@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const maintenanceTaskSchema = new mongoose.Schema({
   user: {
     type: String,
-    required: true,
+    required: false,
   },
   task: {
     type: String,
