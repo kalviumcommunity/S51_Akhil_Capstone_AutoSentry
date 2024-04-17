@@ -25,9 +25,9 @@ const TaskDashboard = () => {
 
   return (
     <div className="parenttask">
-      <h1>Your Maintenance Tasks</h1>
+      <h1 className='heading'>Your Maintenance Tasks</h1>
       <div className="task-dashboardpar">
-        <h2>New Task</h2>
+        <h2 className='subheading'>New Task</h2> 
         <div className="task-dashboard">
           <form onSubmit={Submit}>
             <input
@@ -62,6 +62,15 @@ const TaskDashboard = () => {
           </form>
           <ToastContainer />
         </div>
+      </div>
+      <div className='pendingblock'>
+        <h2 className='pending'>Pending</h2>
+        <div className='block'>
+        <div className='highpriority'>High</div>
+        <div className="midpriority">mid</div>
+        <div className='lowpriority'>low</div>
+        </div>
+
       </div>
     </div>
   );
