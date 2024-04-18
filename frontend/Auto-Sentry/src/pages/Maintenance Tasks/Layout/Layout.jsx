@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Action from "../Action/Action";
+import { MdDelete } from "react-icons/md";
 import './Layout.css'; 
 
 function Layout(props) {
@@ -24,6 +25,20 @@ function Layout(props) {
 
   const filteredTasks = tasks.filter(task => task.priority === props.level);
 
+  const handleDeleteTask = async (taskId) => {
+    try {
+      const response = await fetch(`http://localhost:5000/api/tasks/${taskId}`, {
+        method: 'DELETE'
+      });
+      if (!response.ok) {
+        throw new Error('Failed to delete task');
+      }
+      fetchTasks();
+    } catch (error) {
+      console.error('Error deleting task:', error);
+    }
+  };
+
   return (
     <div className="layout-container">
       <h2 className="layout-title">
@@ -41,6 +56,9 @@ function Layout(props) {
             <br />
             <span>Description: {task.taskDescription}</span>
           </p>
+          <div className="delbtn" onClick={() => handleDeleteTask(task._id)}>
+            <MdDelete />
+          </div>
           {props.selectedTask === task && (
             <>
               <Action

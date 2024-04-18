@@ -49,33 +49,13 @@ const TaskDashboard = () => {
     .catch(err => console.log(err))
   }
 
-  const handleUpdateTask = (taskId, updatedTask) => {
-    axios.put(`http://localhost:5000/api/tasks/${taskId}`, updatedTask)
-      .then(result => {
-        console.log(result);
-        toast.success('Maintenance Task Updated Successfully');
-        fetchTasks();
-      })
-      .catch(err => console.log(err))
-  };
-
-  const handleDeleteTask = (taskId) => {
-    axios.delete(`http://localhost:5000/api/tasks/${taskId}`)
-      .then(result => {
-        console.log(result);
-        toast.success('Maintenance Task Deleted Successfully');
-        fetchTasks();
-      })
-      .catch(err => console.log(err))
-  };
-
   return (
     <div className="parenttask">
       <h1 className='heading'>Your Maintenance Tasks</h1>
       <div className="task-dashboardpar">
         <h2 className='subheading'>New Task</h2> 
         <div className="task-dashboard">
-        <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit}>
             <input
               name="task"
               type="text"
@@ -118,28 +98,13 @@ const TaskDashboard = () => {
         <h2 className='pending'>Pending Task</h2>
         <div className='block'>
           <div className='highpriority'>
-            <Layout
-              level="High"
-              tasks={tasks.filter(task => task.priority === 'High')}
-              onUpdateTask={handleUpdateTask}
-              onDeleteTask={handleDeleteTask}
-            />
+            <Layout level="High" tasks={tasks.filter(task => task.priority === 'High')} />
           </div>
           <div className="midpriority">
-            <Layout
-              level="Medium"
-              tasks={tasks.filter(task => task.priority === 'Medium')}
-              onUpdateTask={handleUpdateTask}
-              onDeleteTask={handleDeleteTask}
-            />
+            <Layout level="Medium" tasks={tasks.filter(task => task.priority === 'Medium')} />
           </div>
           <div className='lowpriority'>
-            <Layout
-              level="Low"
-              tasks={tasks.filter(task => task.priority === 'Low')}
-              onUpdateTask={handleUpdateTask}
-              onDeleteTask={handleDeleteTask}
-            />
+            <Layout level="Low" tasks={tasks.filter(task => task.priority === 'Low')} />
           </div>
         </div>
       </div>
