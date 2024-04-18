@@ -16,9 +16,16 @@
     padding: 0.5rem;
     border-radius: 0.25rem;
     margin-bottom: 0.5rem;
+    position: relative;
   }
   
   .task-details {
     cursor: pointer;
+  }
+  .delbtn{
+    position: absolute;
+    top: 20%;
+    right: 5% ;
+
   }
   
