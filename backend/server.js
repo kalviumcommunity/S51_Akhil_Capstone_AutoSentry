@@ -28,6 +28,7 @@ secondDBConnection.on('error', console.error.bind(console, 'Second Database Conn
 secondDBConnection.once('open', function () {
   console.log('Connected to Second Database!');
 
+  // GET all tasks
   app.get('/api/tasks', (req, res) => {
     MaintenanceTask.find({})
       .then(tasks => {
@@ -37,9 +38,10 @@ secondDBConnection.once('open', function () {
         console.error('Error fetching maintenance tasks:', error);
         res.status(500).json({ message: 'Internal server error' });
       });
-});
+  });
 
-app.post('/api/tasks', (req, res) => {
+  // POST a new task
+  app.post('/api/tasks', (req, res) => {
     MaintenanceTask.create(req.body)
       .then(task => {
         console.log('Maintenance Task created:', task);
@@ -53,8 +55,45 @@ app.post('/api/tasks', (req, res) => {
           res.status(500).json({ message: 'Internal server error' });
         }
       });
+  });
+
+  // Update a task
+  app.put('/api/tasks/:id', (req, res) => {
+    MaintenanceTask.findByIdAndUpdate(req.params.id, req.body, { new: true })
+      .then(updatedTask => {
+        if (!updatedTask) {
+          return res.status(404).json({ message: 'Task not found' });
+        }
+        console.log('Maintenance Task updated:', updatedTask);
+        res.status(200).json(updatedTask);
+      })
+      .catch(error => {
+        console.error('Error updating maintenance task:', error);
+        if (error.name === 'ValidationError') {
+          res.status(400).json({ message: error.message });
+        } else {
+          res.status(500).json({ message: 'Internal server error' });
+        }
+      });
+  });
+
+  // Delete a task
+  app.delete('/api/tasks/:id', (req, res) => {
+    MaintenanceTask.findByIdAndDelete(req.params.id)
+      .then(deletedTask => {
+        if (!deletedTask) {
+          return res.status(404).json({ message: 'Task not found' });
+        }
+        console.log('Maintenance Task deleted:', deletedTask);
+        res.status(200).json({ message: 'Task deleted successfully' });
+      })
+      .catch(error => {
+        console.error('Error deleting maintenance task:', error);
+        res.status(500).json({ message: 'Internal server error' });
+      });
+  });
 });
-});
+
 
 // Routes for Vehicle DB Database
 app.get('/', welcome);
