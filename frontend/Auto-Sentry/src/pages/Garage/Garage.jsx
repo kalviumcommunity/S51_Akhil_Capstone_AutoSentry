@@ -63,8 +63,8 @@ const Garage = () => {
                 <NavLink to={`/maintenancetasks`} >
                   <button className="btn-mt">Maintenance tasks</button>
                 </NavLink>
-                <NavLink to={`/update/${vehicle._id}`} >
-                  <button className="btn-mt">Empty</button>
+                <NavLink to={`/servicehistory`} >
+                  <button className="btn-mt">Service History</button>
                 </NavLink>
                 <NavLink to={`/update/${vehicle._id}`} >
                   <button className="btn-mt">Empty</button>

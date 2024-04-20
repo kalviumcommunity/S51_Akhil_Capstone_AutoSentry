@@ -1,0 +1,36 @@
+/* VehicleServiceHistory.css */
+
+.service-history-container {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .service-form input {
+    margin-bottom: 10px;
+    padding: 5px;
+    width: 100%;
+  }
+  
+  .service-form button {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .service-list ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .service-list li {
+    background-color: #f4f4f4;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .service-list span {
+    margin-right: 10px;
+  }
+  
