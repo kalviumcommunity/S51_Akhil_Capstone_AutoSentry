@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth0 } from '@auth0/auth0-react';
+import { NavLink } from "react-router-dom";
 import './TaskDashboard.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -90,6 +91,9 @@ const TaskDashboard = () => {
               required
             />
             <button type="submit">Add Task+</button>
+            <NavLink to={`/Googlecalender`} >
+              <button className="btn-mt">Add task to Google Calender</button>
+            </NavLink>
           </form>
           <ToastContainer />
         </div>

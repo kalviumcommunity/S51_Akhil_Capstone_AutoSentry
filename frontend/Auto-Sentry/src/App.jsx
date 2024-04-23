@@ -17,6 +17,7 @@ import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Maintenancetasks from './pages/Maintenance Tasks/Maintenancetasks';
 import VehicleServiceHistory from './pages/Service History/VehicleServiceHistory';
+import GoogleCalender from './pages/GoogleCalender/GoogleCalender'
 
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
         <Route path='/update/:id' element={<UpdateVehicle />}/>
         <Route path='/maintenancetasks' element={<Maintenancetasks />} />
         <Route path='/servicehistory' element={<VehicleServiceHistory />} />
+        <Route path='/Googlecalender' element={<GoogleCalender.jsx />} />
       </Routes>
     </Router>
   ); 
