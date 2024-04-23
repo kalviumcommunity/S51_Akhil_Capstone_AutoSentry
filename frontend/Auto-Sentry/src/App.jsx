@@ -36,7 +36,7 @@ function App() {
         <Route path='/update/:id' element={<UpdateVehicle />}/>
         <Route path='/maintenancetasks' element={<Maintenancetasks />} />
         <Route path='/servicehistory' element={<VehicleServiceHistory />} />
-        <Route path='/Googlecalender' element={<GoogleCalender.jsx />} />
+        <Route path='/Googlecalender' element={<GoogleCalender />} />
       </Routes>
     </Router>
   ); 
