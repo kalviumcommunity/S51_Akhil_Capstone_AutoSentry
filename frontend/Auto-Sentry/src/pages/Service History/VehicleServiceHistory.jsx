@@ -4,6 +4,8 @@ import { imgDB, txtDB } from "./Historyconfig";
 import { v4 } from "uuid";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { addDoc, collection, getDocs } from "firebase/firestore";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const VehicleServiceHistory = () => {
   const [formData, setFormData] = useState({
@@ -48,7 +50,7 @@ const VehicleServiceHistory = () => {
       description,
       image
     });
-    alert("Data added successfully");
+    toast.success("Data added successfully");
   };
 
   const getData = async () =>{
@@ -66,58 +68,93 @@ const VehicleServiceHistory = () => {
   }, []);
 
   return (
-    <div>
-      <input 
-        type="text" 
-        name="service" 
-        value={formData.service} 
-        onChange={handleChange} 
-        placeholder="Service" 
-      /><br />
-      <input 
-        type="date" 
-        name="serviceDate" 
-        value={formData.serviceDate} 
-        onChange={handleChange} 
-        placeholder="Service Date" 
-      /><br />
-      <input 
-        type="text" 
-        name="mileage" 
-        value={formData.mileage} 
-        onChange={handleChange} 
-        placeholder="Mileage" 
-      /><br />
-      <input 
-        type="text" 
-        name="cost" 
-        value={formData.cost} 
-        onChange={handleChange} 
-        placeholder="Cost" 
-      /><br />
-      <input 
-        type="text" 
-        name="description" 
-        value={formData.description} 
-        onChange={handleChange} 
-        placeholder="Description" 
-      /><br />
-      <input 
-        type="file" 
-        onChange={handleUpload} 
-      /><br /><br />
-      <button onClick={handleClick}>Add</button>
-
-      {data.map(value => (
-        <div key={value.id}>
-          <h1>{value.service}</h1>
-          <p>Service Date: {value.serviceDate}</p>
-          <p>Mileage: {value.mileage}</p>
-          <p>Cost: {value.cost}</p>
-          <p>Description: {value.description}</p>
-          <img src={value.image} height='200px' width='200px' alt='' />
+    <div className="vehicle-service-history-container">
+      <h1 className="title">Vehicle Service History</h1>
+      <h3>Add New Entry</h3>
+      <br/>
+      <div className="form-container">
+        <div className="form">
+          <div className="form-group">
+            <label htmlFor="service">Service:</label>
+            <input 
+              type="text" 
+              name="service" 
+              id="service"
+              value={formData.service} 
+              onChange={handleChange} 
+              placeholder="Service" 
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="serviceDate">Service Date:</label>
+            <input 
+              type="date" 
+              name="serviceDate" 
+              id="serviceDate"
+              value={formData.serviceDate} 
+              onChange={handleChange} 
+              placeholder="Service Date" 
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="mileage">Mileage:</label>
+            <input 
+              type="text" 
+              name="mileage" 
+              id="mileage"
+              value={formData.mileage} 
+              onChange={handleChange} 
+              placeholder="Mileage" 
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="cost">Cost:</label>
+            <input 
+              type="text" 
+              name="cost" 
+              id="cost"
+              value={formData.cost} 
+              onChange={handleChange} 
+              placeholder="Cost" 
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="description">Description:</label>
+            <textarea
+              name="description" 
+              id="description"
+              value={formData.description} 
+              onChange={handleChange} 
+              placeholder="Description" 
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="image">Upload Image:</label>
+            <input 
+              type="file" 
+              id="image"
+              onChange={handleUpload} 
+            />
+          </div>
+          <div className="form-group">
+            <button onClick={handleClick}>Add</button>
+          </div>
         </div>
-      ))}
+      </div>
+
+      <div className="history-container">
+        <h3>Your Service History</h3>
+        {data.map(value => (
+          <div key={value.id} className="service-item">
+            <h2>{value.service}</h2>
+            <p><strong>Service Date:</strong> {value.serviceDate}</p>
+            <p><strong>Mileage:</strong> {value.mileage}</p>
+            <p><strong>Cost:</strong> {value.cost}</p>
+            <p><strong>Description:</strong> {value.description}</p>
+            <img src={value.image} alt='Service' />
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
