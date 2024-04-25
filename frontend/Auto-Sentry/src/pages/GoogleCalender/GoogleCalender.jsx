@@ -5,6 +5,7 @@ import {
   useSessionContext,
 } from "@supabase/auth-helpers-react";
 import DateTimePicker from "react-datetime-picker";
+import { ToastContainer,toast } from 'react-toastify';
 import 'react-datetime-picker/dist/DateTimePicker.css';
 import 'react-calendar/dist/Calendar.css';
 import 'react-clock/dist/Clock.css';
@@ -72,13 +73,14 @@ const GoogleCalendar = () => {
       })
       .then((data) => {
         console.log(data);
-        alert("Event created, check your Google Calendar!");
+        toast.success("Event created, check your Google Calendar!");
       });
   }
 
   console.log(session);
   return (
 <div className="App">
+  <ToastContainer />
   <div className="container">
     {session ?
       <>

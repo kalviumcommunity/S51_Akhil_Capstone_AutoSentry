@@ -38,11 +38,6 @@ const AddNew = () => {
       <div className='form-content'>
         <form onSubmit={Submit}>
           <h2>Add Vehicle</h2>
-          {/* <div className='form-group'>
-            <label className='form-label' htmlFor='username'>Username:</label>
-            <input type='text'placeholder='Enter Username'className='form-control'value={username}
-              onChange={(e) => setUsername(e.target.value)}/>
-          </div> */}
           <div className='form-group'>
             <label className='form-label' htmlFor='make'>Make:</label>
             <input type='text' placeholder='Enter Make' className='form-control'
