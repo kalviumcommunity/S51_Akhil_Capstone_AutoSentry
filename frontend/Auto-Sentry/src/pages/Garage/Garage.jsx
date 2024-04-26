@@ -7,6 +7,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./Garage.css";
+import RedirectService from "./redirectService"; // Import the RedirectService function
 
 const Garage = () => {
   const [vehicles, setVehicles] = useState([]);
@@ -50,27 +51,41 @@ const Garage = () => {
           <div key={vehicle._id} className="vehicle-card">
             <img src={vehicle.image} alt="Vehicle" />
             <div className="vehicle-details">
-              <h3>{vehicle.make} {vehicle.model}</h3>
+              <h3>
+                {vehicle.make} {vehicle.model}
+              </h3>
               <p>Year: {vehicle.year}</p>
               <p>Modification: {vehicle.modification}</p>
               <div className="control-btns">
-                <NavLink to={`/update/${vehicle._id}`} className="update" activeClassName="active">
+                <NavLink
+                  to={`/update/${vehicle._id}`}
+                  className="update"
+                  activeClassName="active"
+                >
                   <FaPen />
                 </NavLink>
-                <a className='btn-danger' onClick={(e)=>handleDelete(vehicle._id)}><MdDelete /></a>
+                <a
+                  className="btn-danger"
+                  onClick={(e) => handleDelete(vehicle._id)}
+                >
+                  <MdDelete />
+                </a>
               </div>
               <div className="activ-btns">
-                <NavLink to={`/maintenancetasks`} >
+                <NavLink to={`/maintenancetasks`}>
                   <button className="btn-mt">Maintenance tasks</button>
                 </NavLink>
-                <NavLink to={`/servicehistory`} >
+                <NavLink to={`/servicehistory`}>
                   <button className="btn-mt">Service History</button>
                 </NavLink>
-                <NavLink to={`/update/${vehicle._id}`} >
+                <button
+                  className="btn-mt"
+                  onClick={() => RedirectService(vehicle.make)}
+                >
+                  Book Service
+                </button>
+                <NavLink to={`/servicehistory`}>
                   <button className="btn-mt">Empty</button>
-                </NavLink>
-                <NavLink to={`/update/${vehicle._id}`}>
-                  <button className="btn-mt">Maintenance tasks</button>
                 </NavLink>
               </div>
             </div>

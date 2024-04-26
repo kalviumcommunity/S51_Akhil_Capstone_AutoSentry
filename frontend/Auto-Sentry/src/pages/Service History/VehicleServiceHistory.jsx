@@ -3,11 +3,14 @@ import './VehicleServiceHistory.css';
 import { imgDB, txtDB } from "./Historyconfig";
 import { v4 } from "uuid";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { addDoc, collection, getDocs } from "firebase/firestore";
+import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
+import { useAuth0 } from "@auth0/auth0-react";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const VehicleServiceHistory = () => {
+  const { user, isAuthenticated } = useAuth0();
+  const [currentUser, setCurrentUser] = useState('');
   const [formData, setFormData] = useState({
     service: '',
     serviceDate: '',
@@ -17,6 +20,12 @@ const VehicleServiceHistory = () => {
     image: ''
   });
   const [data, setData] = useState([]);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      setCurrentUser(user.nickname);
+    }
+  }, [isAuthenticated, user]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -43,6 +52,7 @@ const VehicleServiceHistory = () => {
     const { service, serviceDate, mileage, cost, description, image } = formData;
     const dataRef = collection(txtDB, 'txtData');
     await addDoc(dataRef, {
+      user: currentUser,
       service,
       serviceDate,
       mileage,
@@ -50,12 +60,14 @@ const VehicleServiceHistory = () => {
       description,
       image
     });
+    location.reload();
     toast.success("Data added successfully");
   };
 
   const getData = async () =>{
-    const dataRef = collection(txtDB,'txtData')
-    const querySnapshot = await getDocs(dataRef)
+    const dataRef = collection(txtDB,'txtData');
+    const q = query(dataRef, where("user", "==", currentUser));
+    const querySnapshot = await getDocs(q);
     const data = querySnapshot.docs.map(doc => ({
       id: doc.id,
       ...doc.data()
@@ -64,13 +76,32 @@ const VehicleServiceHistory = () => {
   }
 
   useEffect(() => {
-    getData();
-  }, []);
+    if (currentUser) {
+      getData();
+    }
+  }, [currentUser]);
+
+  const handleUserChange = (e) => {
+    setCurrentUser(e.target.value);
+  };
+
+  if (!isAuthenticated) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="vehicle-service-history-container">
       <h1 className="title">Vehicle Service History</h1>
       <h3>Add New Entry</h3>
+      <div>
+        {/* <label htmlFor="user">User:</label>
+        <input 
+          type="text" 
+          id="user" 
+          value={currentUser} 
+          onChange={handleUserChange} 
+        /> */}
+      </div>
       <br/>
       <div className="form-container">
         <div className="form">
