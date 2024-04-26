@@ -94,13 +94,6 @@ const VehicleServiceHistory = () => {
       <h1 className="title">Vehicle Service History</h1>
       <h3>Add New Entry</h3>
       <div>
-        {/* <label htmlFor="user">User:</label>
-        <input 
-          type="text" 
-          id="user" 
-          value={currentUser} 
-          onChange={handleUserChange} 
-        /> */}
       </div>
       <br/>
       <div className="form-container">
