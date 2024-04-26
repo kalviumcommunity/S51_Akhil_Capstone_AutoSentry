@@ -93,8 +93,18 @@
   .btn-mt:hover {
     background-color: #0056b3;
   }
-  
-  
+  .loader {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed; /* Add this line */
+    top: 0; /* Add this line */
+    left: 0; /* Add this line */
+    right: 0; /* Add this line */
+    bottom: 0; /* Add this line */
+    background-color: rgba(255, 255, 255, 0.8); /* Add this line */
+  }
   
 
   
