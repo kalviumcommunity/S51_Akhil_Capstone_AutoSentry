@@ -1,5 +1,6 @@
 import React from 'react'
 import { NavLink } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 import { FaHome } from "react-icons/fa";
 import { FaPhone } from "react-icons/fa6";
 import { IoIosMail } from "react-icons/io";
@@ -7,13 +8,36 @@ import { FaGithub } from "react-icons/fa";
 import linkedinImage from '../../assets/linkedin.png';
 import githubImage from '../../assets/github.png';
 import instagramImage from '../../assets/instagram.png';
-import { FaInstagramSquare } from "react-icons/fa";
 import './Home.css'
 
 const Home = () => {
+  const { loginWithRedirect, isAuthenticated } = useAuth0();
   return (
     <div className="home">
-      <div className="parent1">Home</div>
+      <div className="parent1">
+        <div className="circlepar1"></div>
+        <div className="par1">
+          <div className="sec1">
+            <h1>Ditch The Spreadsheets.</h1>
+            <h2>Smart Car Care Starts Here.</h2>
+            <p>
+              Say goodbye to lost receipts and missed service intervals. Our car
+              maintenance <br />tracker keeps everything organized, reminding you of
+              upcoming appointments to avoid costly repairs and keep your car
+              running smoothly.
+            </p>
+            {!isAuthenticated && (
+              <button className="homeactbtn1" onClick={() => loginWithRedirect()}>Get Started</button>
+            )}
+            {isAuthenticated && (
+              <button className="homeactbtn1"><NavLink to="/garage">My Garage</NavLink></button>
+            )}
+            <button className="homeactbtn2"><NavLink to={`/about`}>Explore</NavLink></button>
+            
+          </div>
+          <div className="sec2"></div>
+        </div>
+      </div>
       <div className="parent2"></div>
       <div className="parent3"></div>
       <div className="parent4"></div>
@@ -21,17 +45,17 @@ const Home = () => {
       <div className="parent6"></div>
       <div className="parent7"></div>
       <div className="footer">
-      <div className="calltoaction">
-        <div className="circle"></div>
-        <div className="newsletter">
-          <p>Want to know the latest news in the Auto industry?</p>
-          <p>Subscribe to our newsletter!</p>
-          <div className="subscribe-form">
-            <input type="email" placeholder="Your email address"></input>
-            <button type="submit">Subscribe now</button>
+        <div className="calltoaction">
+          <div className="circle"></div>
+          <div className="newsletter">
+            <p>Want to know the latest news in the Auto industry?</p>
+            <p>Subscribe to our newsletter!</p>
+            <div className="subscribe-form">
+              <input type="email" placeholder="Your email address"></input>
+              <button type="submit">Subscribe now</button>
+            </div>
           </div>
         </div>
-      </div>
         <div className="footerch">
           <div className="footerabt">
             <h1>Auto Sentry</h1>
@@ -54,10 +78,10 @@ const Home = () => {
                   <NavLink to={`/`}>Home</NavLink>
                 </li>
                 <li>
-                  <NavLink to={`/`}>About</NavLink>
+                  <NavLink to={`/about`}>About</NavLink>
                 </li>
                 <li>
-                  <NavLink to={`/`}>Services</NavLink>
+                  <NavLink to={`/services`}>Services</NavLink>
                 </li>
               </ul>
             </div>
@@ -77,20 +101,22 @@ const Home = () => {
             </div>
             <div className="footer-column">
               <h3>Follow</h3>
-              <ul>
+              <ul className="sociallinks">
                 <li>
                   <NavLink to={`https://github.com/akhilk49`}>
-                  <img src={githubImage} alt="Github" />
+                    <img src={githubImage} alt="Github" />
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to={`https://www.linkedin.com/in/akhil-k-kurian-2a473a281/`}>
+                  <NavLink
+                    to={`https://www.linkedin.com/in/akhil-k-kurian-2a473a281/`}
+                  >
                     <img src={linkedinImage} alt="Image description" />
                   </NavLink>
                 </li>
                 <li>
                   <NavLink to={`/`}>
-                  <img src={instagramImage} alt="Image description" />
+                    <img src={instagramImage} alt="Image description" />
                   </NavLink>
                 </li>
               </ul>
