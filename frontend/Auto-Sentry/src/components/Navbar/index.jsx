@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import "./Navbar.css";
+import logoimg from '../../assets/AutoSentry_transparent.png'
 import { NavLink } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
 import { useAuth0 } from "@auth0/auth0-react";
-import { IoCarSharp } from "react-icons/io5";
+import { TiArrowSortedDown } from "react-icons/ti";
 import { RiAccountCircleFill } from "react-icons/ri";
 import { ToastContainer } from "react-toastify";
 
@@ -14,10 +15,12 @@ const Navbar = () => {
   console.log("Current User", user);
 
   return (
+    <div className="nav-container">
     <nav className="nav">
+      <div className="circlenav"></div>
       <ToastContainer />
-      <NavLink to="/" className="nav-link">
-        <h1>AutoSentry</h1>
+      <NavLink to="/" className="logocon">
+        <img src={logoimg} alt="logo" className="logo-img" />
       </NavLink>
       <FaBars className="bars-icon" />
       <div className="nav-menu">
@@ -42,42 +45,29 @@ const Navbar = () => {
         >
           Contact Us
         </NavLink>
-        {!isAuthenticated && (
-          <NavLink
-            to="/sign-up"
-            className="nav-link"
-            activeClassName="active"
-          >
-            Sign Up
-          </NavLink>
-        )}
       </div>
       <div className="auth0">
-        {isAuthenticated && (
-          <div className="my-garage">
-            <IoCarSharp />
-            <NavLink
-              to="/garage"
-              className="nav-link"
-              activeClassName="active"
-            >
-              MY GARAGE
-            </NavLink>
-          </div>
-        )}
         {isAuthenticated && (
           <div
             className="my-account"
             onMouseEnter={() => setShowDropdown(true)}
             onMouseLeave={() => setShowDropdown(false)}
           >
-            <RiAccountCircleFill />
             <NavLink to="/about" className="nav-link" activeClassName="active">
-              MY ACCOUNT
+              <RiAccountCircleFill /> &nbsp; MY ACCOUNT <TiArrowSortedDown />
             </NavLink>
           </div>
         )}
       </div>
+      {!isAuthenticated && (
+        <button
+          className="nav-btn-link"
+          onClick={() => loginWithRedirect()}
+        >
+          Log In
+        </button>
+      )}
+      </nav>
       {isAuthenticated && showDropdown && (
         <div
           className="dropdown"
@@ -91,6 +81,9 @@ const Navbar = () => {
               <br />
             </h3>
           </div>
+          <NavLink to="/garage" activeClassName="active">
+            My Garage
+          </NavLink>
           <NavLink to="/profile" activeClassName="active">
             My Profile
           </NavLink>
@@ -103,21 +96,10 @@ const Navbar = () => {
           <NavLink to="/about" activeClassName="active">
             Account Settings
           </NavLink>
-          <NavLink to="/billing" activeClassName="active">
-            Billing Information
-          </NavLink>
           <button onClick={() => logout()}>Logout</button>
         </div>
       )}
-      {!isAuthenticated && (
-        <button
-          className="nav-btn-link"
-          onClick={() => loginWithRedirect()}
-        >
-          Login
-        </button>
-      )}
-    </nav>
+    </div>
   );
 };
 

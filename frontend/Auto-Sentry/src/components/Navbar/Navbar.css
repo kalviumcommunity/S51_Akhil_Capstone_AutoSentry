@@ -1,12 +1,16 @@
 /* Nav styles */
 .nav {
-    background: #000;
-    height: 80px;
-    display: flex;
-    justify-content: space-between;
-    padding: 0.5rem calc((100vw - 1000px) / 2);
-    z-index: 10;
-  }
+  position: relative;
+  overflow: hidden;
+  background: rgba(10, 38, 64, 1);
+  height: 150px;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem calc((100vw - 1000px) / 2);
+  z-index: 10;
+}
   
   /* NavLink styles */
   .nav-link {
@@ -14,9 +18,19 @@
     display: flex;
     align-items: center;
     text-decoration: none;
-    padding: 0 1rem;
+    font-size: 17px;
+    padding: 0 2rem;
     height: 100%;
     cursor: pointer;
+  }
+  .logocon{
+    position: absolute;
+    top: -27%;
+    left: 0%;
+  }
+  .logo-img {
+    width: 350px; 
+    height: auto;
   }
   
   .nav-link.active {
@@ -28,49 +42,33 @@
     display: none;
     color: #fff;
   }
-  
-  @media screen and (max-width: 768px) {
-    .bars-icon {
-      display: block;
-      position: absolute;
-      top: 0;
-      right: 0;
-      transform: translate(-100%, 75%);
-      font-size: 1.8rem;
-      cursor: pointer;
-    }
-  }
-  
+
   /* NavMenu styles */
   .nav-menu {
+    position: absolute;
+    right: 13%;
     display: flex;
     align-items: center;
-    margin-right: -24px;
-  }
-  
-  @media screen and (max-width: 768px) {
-    .nav-menu {
-      display: none;
-    }
   }
   
   /* NavBtn styles */
   .nav-btn {
     display: flex;
     align-items: center;
-    margin-right: -24px;
   }
   
-  /* NavBtnLink styles */
   .nav-btn-link {
-    border-radius: 4px;
-    background: #4a6dd7;
-    padding: 10px 22px;
-    color: #fff;
+    position: absolute;
+    right: 4%;
+    border-radius: 20px;
+    background: #fff;
+    padding: 12px 40px;
+    color: #0A2640;
     border: none;
     outline: none;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
+    font-weight:bold;
     text-decoration: none;
   }
   
@@ -89,58 +87,27 @@
     align-items: center;
   }
   .user-avatar {
-    width: 40px; /* Adjust size as needed */
-    height: 40px; /* Adjust size as needed */
-    border-radius: 50%; /* Rounded avatar */
-    margin-right: 10px; /* Space between avatar and name */
+    width: 40px; 
+    height: 40px; 
+    border-radius: 50%;
+    margin-right: 10px; 
   }
   .active {
-    color: blue; /* Change to your active color */
+    color: blue; 
   }
 
-  .my-garage,.my-account{
+  .my-account{
+    position: absolute;
+    right: 1%;
     display: flex;
     align-items: center;
-    margin: 10px;
   }
 
-
-
-
-/* .dropdown{
-  position: absolute;
-  top: 10%;
-  right: 15%;
-  width: 20%;
-  height: 50%;
-  border: 1px solid blue;
-  border-radius: 10%;
-  background-color: green;
-}
-
-.userinfo{
-  border: 1px solid white;
-  text-align: center;
-  margin-top: 10px;
-} */
-
-/* .dropdown {
-  position: absolute;
-  top: 6%;
-  right: 20%;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 25px; 
-  z-index: 1000;
-  min-width: 200px;
-} */
 
 .dropdown {
   position: absolute;
-  top: 8.5%;
-  right: 20%;
+  top: 12.5%;
+  right: 2%;
   background-color: #fff;
   border: 1px solid #ccc; 
   border-radius: 4px; 
@@ -200,4 +167,16 @@
 
 .dropdown button:hover {
   background-color: red;
+}
+
+
+.circlenav {
+  position: absolute;
+  z-index: -2;
+  top: -700px;
+  right: -650px;
+  height: 1293px;
+  width: 1293px;
+  background-color: rgba(28, 61, 91, 1);
+  border-radius: 50%;
 }
