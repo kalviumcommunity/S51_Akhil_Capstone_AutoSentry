@@ -26,3 +26,7 @@ Auto Sentry is a web application designed to assist vehicle owners in managing a
 7. **Testing**: Run tests with `npm test`.
 8. **Development Workflow**: Use `npm run dev` for automatic reloading.
 9. **Troubleshooting**: Refer to documentation or issue tracker for help.
+
+
+##Backend Deployed Link :- https://autosentry.onrender.com/
+##Frontend Deployed Link :- https://autosentry.netlify.app/
