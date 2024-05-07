@@ -53,8 +53,12 @@ const Home = () => {
       </div>
       <div className="parent2">
         <div className="par2sec1">
-          <p className="
-          our-service">Our Services</p>
+          <p
+            className="
+          our-service"
+          >
+            Our Services
+          </p>
           <p className="maintanice-tracker">
             Track, Maintain, and Save with Our Vehicle Maintenance Tracker!
           </p>
@@ -62,11 +66,13 @@ const Home = () => {
         <div className="par2sec2">
           <div className="coolfeature">
             <div className="image-div">
-             <img src={trackimg} alt="trackimg" />
+              <img src={trackimg} alt="trackimg" />
             </div>
             <div className="tile-preview">
               <p className="tile-name ">Track</p>
-              <p className="subtitle">Effortless Maintenance Tracking Made Simple</p>
+              <p className="subtitle">
+                Effortless Maintenance Tracking Made Simple
+              </p>
               <NavLink to={`/`}>
                 Explore Page <HiOutlineArrowSmRight />
               </NavLink>
@@ -78,7 +84,9 @@ const Home = () => {
             </div>
             <div className="tile-preview">
               <p className="tile-name ">Maintain</p>
-              <p className="subtitle">Streamline Your Vehicle Maintenance Routine</p>
+              <p className="subtitle">
+                Streamline Your Vehicle Maintenance Routine
+              </p>
               <NavLink to={`/`}>
                 Explore Page <HiOutlineArrowSmRight />
               </NavLink>
@@ -90,7 +98,9 @@ const Home = () => {
             </div>
             <div className="tile-preview">
               <p className="tile-name ">Schedule</p>
-              <p className="subtitle">Never Miss a Service Appointment Again with Easy Scheduling</p>
+              <p className="subtitle">
+                Never Miss a Service Appointment Again with Easy Scheduling
+              </p>
               <NavLink to={`/`}>
                 Explore Page <HiOutlineArrowSmRight />
               </NavLink>
@@ -98,8 +108,81 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <div className="parent3"></div>
-      <div className="parent4"></div>
+      <div className="parent3">
+        <div className="unique-container">
+          <div className="unique-image-section">
+            {/* Image and graphical card would be placed here */}
+          </div>
+          <div className="unique-text-section">
+            <h1>
+              We connect our customers with the best, and help them keep up-and
+              stay open.
+            </h1>
+            <ul className="unique-list">
+              <li>We connect our customers with the best.</li>
+              <li>Advisor success customer launch party.</li>
+              <li>Business-to-consumer long tail.</li>
+            </ul>
+            <button className="unique-button">Start now</button>
+          </div>
+        </div>
+      </div>
+      <div className="parent4">
+        <div className="custom-unique-container">
+          <div className="custom-unique-left-section">
+            <h1 className="custom-unique-main-heading">
+              We connect our customers with the best, and help them keep up-and
+              stay open.
+            </h1>
+            <button className="custom-unique-button custom-unique-connection-button">
+              <span
+                className="custom-unique-icon"
+                role="img"
+                aria-label="link-icon"
+              >
+                🔗
+              </span>{" "}
+              We connect our customers with the best.
+            </button>
+            <button className="custom-unique-button custom-unique-party-button">
+              <span
+                className="custom-unique-icon"
+                role="img"
+                aria-label="party-icon"
+              >
+                🎉
+              </span>{" "}
+              Advisor success customer launch party.
+            </button>
+            <button className="custom-unique-button custom-unique-business-button">
+              <span
+                className="custom-unique-icon"
+                role="img"
+                aria-label="graph-icon"
+              >
+                💹
+              </span>{" "}
+              Business-to-consumer long tail.
+            </button>
+          </div>
+          <div className="custom-unique-right-section">
+            <img
+              src="unique-woman-phone.jpg"
+              alt="Woman talking on the phone"
+              className="custom-unique-image"
+            />
+            <div className="custom-unique-overlay">
+              <h2 className="custom-unique-overlay-item">
+                35% - Agile Development
+              </h2>
+              <h2 className="custom-unique-overlay-item">
+                30% - Investor bandwidth
+              </h2>
+              <h2 className="custom-unique-overlay-item">35% - A/B testing</h2>
+            </div>
+          </div>
+        </div>
+      </div>
       <div className="parent5"></div>
       <div className="parent6"></div>
       <div className="parent7"></div>
