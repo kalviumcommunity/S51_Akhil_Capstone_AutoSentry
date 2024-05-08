@@ -1,5 +1,5 @@
 .home {
-  height: 800vh;
+  height: 600vh;
 }
 .parent1 {
   position: relative;
@@ -353,116 +353,102 @@
   text-emphasis: none;
 }
 .parent3{
-  border: solid 1px black;
-}
-
-
-.unique-container {
   display: flex;
-  height: 100vh;
-  width: 100vw;
 }
 
-.unique-image-section {
-  flex: 1;
-  background-image: url('unique-path-to-man-image.jpg');
-  background-size: cover;
-  position: relative;
-}
-
-.unique-image-section::after {
-  content: '';
-  position: absolute;
-  width: 100%;
+.par3div1{
+  width: 50%;
   height: 100%;
-  background-image: url('unique-path-to-graphic-card.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
+
 }
-
-.unique-text-section {
-  flex: 1;
-  padding: 20px;
-}
-
-.unique-text-section h1 {
-  margin-bottom: 20px;
-}
-
-.unique-list {
-  list-style: none;
-}
-
-.unique-list li {
-  margin-bottom: 10px;
-  padding-left: 30px;
-  position: relative;
-}
-
-.unique-list li::before {
-  content: '✔';
-  position: absolute;
-  left: 0;
-}
-
-.unique-button {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.unique-button:hover {
-  background-color: #0056b3;
-}
-
-
-.custom-unique-container {
+.par3div2 {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
-  height: 100vh;
+  width: 50%;
+  height: 100%;
+}
+.par3div2 h2{
+  margin-top: 25%;
+  width: 70%;
+  font-size: 32px;
+}
+.feature{
+  /* margin-top: 10px; */
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  font-size: 20px;
+}
+
+.feature div{
+  display: flex;
+  margin-top: 20px;
+  align-items: center;
+}
+
+.par3startbtn{
+  background-color: #000000;
+  padding: 25px 65px;
+  margin-right: 45%;
+  margin-top: 5%;
+  border-radius: 50px;
+}
+.par3startbtndiv{
+  display: flex;
+  align-items: center;
+}
+.par3startbtn a{
+  color: white;
+  font-size: 18px;
+  text-decoration: none;
+}
+
+
+
+
+
+.parent7{
+  text-align: center;
+}
+.parent7 button{
+
+}
+
+.par7blog{
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 200px;
+  height: 55%;
+}
+.Ourblog{
+  margin-top: 50px;
+  font-weight: 400;
+  color: gray;
+  font-size: larger;
+
+}
+
+.blogcon{
+  border: 1px solid red;
+  width: 22%;
+  height: 70%;
+}
+.par7loadmorebtn{
+  background-color: transparent;
+  color: #000000;
+  border: 2px solid black;
+  padding: 25px 65px;
+  border-radius: 50px;
+  font-size: 18px;
+}
+
+.pa5div1{
+  text-align: center;
   width: 100vw;
 }
-
-.custom-unique-left-section {
-  flex: 1;
-}
-
-.custom-unique-main-heading {
-  /* Style your main heading here */
-}
-
-.custom-unique-button {
-  display: block;
-  margin: 10px 0;
-  /* Add more styling to match the design */
-}
-
-.custom-unique-icon {
-  /* Style your icons here */
-}
-
-.custom-unique-right-section {
-  flex: 1;
-  position: relative;
-}
-
-.custom-unique-image {
-  width: 100%;
-  height: auto;
-}
-
-.custom-unique-overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
-
-.custom-unique-overlay-item {
-  /* Style your overlay items here */
+.par5div1 h2{
+  color: white;
+  font-size: 38px;
+  
 }
