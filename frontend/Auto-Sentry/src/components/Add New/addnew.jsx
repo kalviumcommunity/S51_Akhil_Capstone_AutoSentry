@@ -4,6 +4,8 @@ import axios from 'axios';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
+import Autosuggest from 'react-autosuggest';
+import makesAndModels from './makesAndModels.js';
 
 const AddNew = () => {
   const { user, isAuthenticated } = useAuth0();
@@ -14,6 +16,8 @@ const AddNew = () => {
   const [modification, setModification] = useState('');
   const [vin, setVin] = useState('');
   const [image, setImage] = useState('');
+  const [suggestions, setSuggestions] = useState([]);
+  const [modelsForMake, setModelsForMake] = useState([]);
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -38,6 +42,46 @@ const AddNew = () => {
       .catch(err => console.log(err));
   };
 
+  const indianCarBrands = Object.keys(makesAndModels);
+
+  const getSuggestions = (value) => {
+    const inputValue = value.trim().toLowerCase();
+    const inputLength = inputValue.length;
+
+    return inputLength === 0
+      ? []
+      : indianCarBrands.filter(
+          (brand) => brand.toLowerCase().slice(0, inputLength) === inputValue
+        );
+  };
+
+  const getModelsForMake = (selectedMake) => {
+    return makesAndModels[selectedMake] || [];
+  };
+
+  const onChange = (event, { newValue }) => {
+    setMake(newValue);
+    setModelsForMake(getModelsForMake(newValue));
+  };
+
+  const onSuggestionsFetchRequested = ({ value }) => {
+    setSuggestions(getSuggestions(value));
+  };
+
+  const onSuggestionsClearRequested = () => {
+    setSuggestions([]);
+  };
+
+  const getSuggestionValue = (suggestion) => suggestion;
+
+  const renderSuggestion = (suggestion) => <div>{suggestion}</div>;
+
+  const inputProps = {
+    placeholder: 'Enter Make',
+    value: make,
+    onChange: onChange
+  };
+
   return (
     isAuthenticated && (
       <div className='form-container'> 
@@ -47,25 +91,28 @@ const AddNew = () => {
             <h2>Add Vehicle</h2>
             <div className='form-group'>
               <label className='form-label' htmlFor='make'>Make:</label>
-              <input
-                type='text'
-                placeholder='Enter Make'
-                className='form-control'
-                value={make}
-                onChange={(e) => setMake(e.target.value)}
-                required
+              <Autosuggest
+                suggestions={suggestions}
+                onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+                onSuggestionsClearRequested={onSuggestionsClearRequested}
+                getSuggestionValue={getSuggestionValue}
+                renderSuggestion={renderSuggestion}
+                inputProps={inputProps}
               />
             </div>
             <div className='form-group'>
               <label className='form-label' htmlFor='model'>Model:</label>
-              <input
-                type='text'
-                placeholder='Enter Model'
+              <select
                 className='form-control'
                 value={model}
                 onChange={(e) => setModel(e.target.value)}
                 required
-              />
+              >
+                <option value=''>Select Model</option>
+                {modelsForMake.map((model, index) => (
+                  <option key={index} value={model}>{model}</option>
+                ))}
+              </select>
             </div>
             <div className='form-group'>
               <label className='form-label' htmlFor='year'>Year:</label>
