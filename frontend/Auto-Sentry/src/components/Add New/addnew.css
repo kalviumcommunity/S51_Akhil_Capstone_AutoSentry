@@ -38,3 +38,25 @@
   border-radius: 5px;
   cursor: pointer;
 }
+
+.react-autosuggest__suggestions-list {
+  margin: 0;
+  padding: 0;
+  width: 45%;
+  list-style-type: none;
+  position: absolute;
+  z-index: 1;
+  background: white;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+}
+
+.react-autosuggest__suggestion {
+  cursor: pointer;
+  padding: 10px 20px;
+}
+
+.react-autosuggest__suggestion--highlighted {
+  background: #ddd;
+}
+
