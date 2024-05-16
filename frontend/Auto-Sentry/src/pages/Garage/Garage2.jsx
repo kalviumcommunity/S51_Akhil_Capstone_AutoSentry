@@ -51,7 +51,7 @@ const Garage = () => {
       <div className="garage-container">
         <h1>My Garage</h1>
         <ToastContainer />
-        {loading ? ( // Render the loader when loading is true
+        {loading ? ( 
           <div className="loader">
             <svg className="car" width="102" height="40" xmlns="http://www.w3.org/2000/svg">
               <g transform="translate(2 1)" stroke="#002742" fill="none" fill-rule="cd  back  evenodd" stroke-linecap="round" stroke-linejoin="round">

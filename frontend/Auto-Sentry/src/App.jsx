@@ -11,6 +11,7 @@ import SignIN from './pages/Login/LoginForm'
 import Garage from './pages/Garage/Garage';
 import Addnew from './components/Add New/addnew'
 import UpdateVehicle from './components/Update Vehicle/updateVehicle';
+import Garage2 from './pages/Garage/Garage2';
 
 
 import { ToastContainer} from 'react-toastify';
@@ -32,6 +33,7 @@ function App() {
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/signin" element={<SignIN />} />
         <Route path="/garage" element={<Garage />} />
+        <Route path='/garage2' element={<Garage2 />} />
         <Route path="/addnew" element={<Addnew />} />
         <Route path='/update/:id' element={<UpdateVehicle />}/>
         <Route path='/maintenancetasks' element={<Maintenancetasks />} />

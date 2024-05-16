@@ -23,6 +23,11 @@ const maintenanceTaskSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  taskStatus: { 
+    type: Boolean,
+    required: false,
+    default: false,
+  }
 },
 {
   timestamps: true,
