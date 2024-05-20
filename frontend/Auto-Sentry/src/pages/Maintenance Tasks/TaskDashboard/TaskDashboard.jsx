@@ -5,11 +5,12 @@ import { ToastContainer, toast } from 'react-toastify';
 import { BsCheckCircleFill } from "react-icons/bs";
 import { FaCalendarPlus } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
-import { NavLink } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import 'react-toastify/dist/ReactToastify.css';
 import './TaskDashboard.css';
 
 const TaskDashboard = () => {
+  const { vehicleId } = useParams();
   const { user, isAuthenticated } = useAuth0();
   const [username, setUsername] = useState(user ? user.nickname : '');
   const [task, setTask] = useState('');
@@ -20,6 +21,7 @@ const TaskDashboard = () => {
   const [tasks, setTasks] = useState([]);
   const [displayCompleted, setDisplayCompleted] = useState(false);
   const [isUpcomingSelected, setIsUpcomingSelected] = useState(true);
+  const [vehicleIdState, setVehicleIdState] = useState(vehicleId);
 
   useEffect(() => {
     if (isAuthenticated && user && user.nickname) {
@@ -30,7 +32,7 @@ const TaskDashboard = () => {
 
   const fetchTasks = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/tasks");
+      const response = await axios.get(`http://localhost:5000/api/tasks/byVehicle/${vehicleIdState}`);
       setTasks(response.data);
     } catch (error) {
       console.error('Error fetching tasks:', error);
@@ -41,11 +43,12 @@ const TaskDashboard = () => {
     e.preventDefault();
     axios.post("http://localhost:5000/api/tasks", {
       user: username,
+      vehicleId: vehicleIdState,
       task,
       priority,
       dueDate,
       taskDescription,
-      taskStatus
+      taskStatus,
     })
     .then(result => {
       console.log(result);
@@ -74,6 +77,7 @@ const TaskDashboard = () => {
       console.error('Error updating task status:', error);
     }
   };
+
   const handleDeleteTask = async (taskId) => {
     try {
       const response = await fetch(`http://localhost:5000/api/tasks/${taskId}`, {

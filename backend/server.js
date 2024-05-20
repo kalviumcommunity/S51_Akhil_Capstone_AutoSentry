@@ -40,6 +40,21 @@ secondDBConnection.once('open', function () {
       });
   });
 
+  app.get('/api/tasks/byVehicle/:vehicleId', (req, res) => {
+    const vehicleId = req.params.vehicleId;
+    MaintenanceTask.find({ vehicleId: vehicleId })
+      .then(tasks => {
+        if (!tasks) {
+          return res.status(404).json({ message: 'No tasks found for this vehicle' });
+        }
+        res.status(200).json(tasks);
+      })
+      .catch(error => {
+        console.error('Error fetching maintenance tasks:', error);
+        res.status(500).json({ message: 'Internal server error' });
+      });
+  });
+
   // POST a new task
   app.post('/api/tasks', (req, res) => {
     MaintenanceTask.create(req.body)

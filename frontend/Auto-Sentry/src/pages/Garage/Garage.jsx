@@ -11,7 +11,7 @@ import RedirectService from "./redirectService";
 
 const Garage = () => {
   const [vehicles, setVehicles] = useState([]);
-  const [loading, setLoading] = useState(true); // State to manage loading
+  const [loading, setLoading] = useState(true); 
   const { user, isAuthenticated } = useAuth0();
 
   useEffect(() => {
@@ -28,7 +28,7 @@ const Garage = () => {
           console.error("Error fetching data:", error);
         })
         .finally(() => {
-          setLoading(false); // Set loading to false whether data fetch succeeds or fails
+          setLoading(false);
         });
     }
   }, [user, isAuthenticated]);
@@ -51,7 +51,7 @@ const Garage = () => {
       <div className="garage-container">
         <h1>My Garage</h1>
         <ToastContainer />
-        {loading ? ( // Render the loader when loading is true
+        {loading ? ( 
           <div className="loader">
             <svg className="car" width="102" height="40" xmlns="http://www.w3.org/2000/svg">
               <g transform="translate(2 1)" stroke="#002742" fill="none" fill-rule="cd  back  evenodd" stroke-linecap="round" stroke-linejoin="round">
@@ -67,7 +67,7 @@ const Garage = () => {
         ) : (
           <div className="vehicle-list">
             {vehicles.map((vehicle) => (
-              <div key={vehicle._id} className="vehicle-card">
+              <div key={vehicle._id} className="vehicle-card" >
                 <img src={vehicle.image} alt="Vehicle" />
                 <div className="vehicle-details">
                   <h3>
@@ -91,7 +91,7 @@ const Garage = () => {
                     </a>
                   </div>
                   <div className="activ-btns">
-                    <NavLink to={`/maintenancetasks`}>
+                    <NavLink to={`/maintenancetask/${vehicle._id}`}>
                       <button className="btn-mt">Maintenance tasks</button>
                     </NavLink>
                     <NavLink to={`/servicehistory`}>
