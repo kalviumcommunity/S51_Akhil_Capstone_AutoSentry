@@ -1,6 +1,7 @@
 .parenttask{
   border: 1px solid red;
   border: none;
+  height: 200vh;
 
 }
 .task-dashboardpar{
@@ -27,40 +28,238 @@
   gap: 20px;
 }
 
-.task-dashboard input,
-.task-dashboard select,
-.task-dashboard textarea {
-  padding: 10px;
-  font-size: 16px;
+
+
+
+
+.taskinput001{
+  width: 380px;
+  height: 50px;
+  border: none;
+  appearance: none;
+  background: #f2f2f2;
+  padding: 12px;
+  border-radius: 5px;
+  outline: none;
+}
+.taskinput001:focus::placeholder{
+  color: transparent;
+}
+.taskinput001::placeholder{
+  color: #222;
+  transition: color 0.3s ease;
+  font-size: 14px;
 }
 
-.task-dashboard button {
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #4caf50;
-  color: white;
+.taskpriority{
+  width: 260px;
+  height: 50px;
   border: none;
   cursor: pointer;
+  appearance: none;
+  background: #f2f2f2;
+  padding: 12px;
+  border-radius: 5px;
+  outline: none;
+}
+.taskduedate{
+  width: 260px;
+  height: 50px;
+  border: none;
+  cursor: pointer;
+  appearance: none;
+  background: #f2f2f2;
+  padding: 12px;
+  border-radius: 5px;
+  outline: none;
+}
+.taskdescription{
+  width: 380px;
+  height: 50px;
+  border: none;
+  appearance: none;
+  background: #f2f2f2;
+  padding: 12px;
+  border-radius: 3px;
+  outline: none;
+}
+.taskdescription:focus::placeholder{
+  color: transparent;
+}
+.taskdescription::placeholder{
+  color: #222;
+  transition: color 0.3s ease;
+  font-size: 14px;
+}
+.tasksubmitbtn{
+  width: 220px;
+  height: 50px;
+  border: none;
+  cursor: pointer;
+  appearance: none;
+  background: #f2f2f2;
+  padding: 12px;
+  border-radius: 5px;
+  outline: none;
+}
+.tasksubmitbtn:hover{
+  background-color: #79cd7d;
 }
 
-.task-dashboard button:hover {
-  background-color: #45a049;
+
+
+
+
+
+
+
+
+.task-dashboard{
+  margin: auto;
+}
+.vehicleinfo{
+  height: 40vh;
+}
+.heading{
+  margin-left: 2.5%;
+  font-size: 36px;
+}
+.subheading{
+  margin: 0%;
+  font-size: 24px;
+  color: black;
 }
 
-.pending{
-  text-align: start;
-  margin: 2% 0% 1% 45px;
-  font-size: x-large;
+
+
+
+.pendingblock{
+  width: 93.5%;
+  height: 50%;
+  margin: auto;
+  border: 1px solid blue;
+  border-radius: 15px;
 }
-.highpriority,.midpriority,.lowpriority{
-  background-color: #79cd7d;  min-width: 30%;
-  min-height: 30vh;
-  font-size: larger;
-  font-weight: 700;
+.tasksaction {
+  width: 100%;
+  height: 8%;
+  background-color: #79cd7d;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
 }
-.block{
+.tasksaction button {
+  width: 220px;
+  height: 100%;
+  border: none;
+  background-color: #79cd7d;
+  border-top-left-radius: 15px;
+  appearance: none;
+  padding: 12px;
+  font-size: 18px;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ;
+  outline: none;
+  border-bottom: 6px solid transparent;
+  transition: border-color 0.2s ease; 
+}
+
+.tasksaction button.selected {
+  border-bottom: 6px solid rgb(58, 53, 53); 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.task {
+  background-color: #f7f7f7;
+  padding: 10px;
   display: flex;
-  justify-content: space-evenly;
-  
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
 
+.task {
+  background-color: #f7f7f7;
+  padding: 10px;
+  display: flex;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.tasktaskdiv {
+  width: 350px;
+  margin-right: 50px;
+  color: #000;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.taskdescriptiondiv {
+  width: 350px;
+  margin-right: 50px;
+  color: #000;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.taskprioritydiv {
+  width: 230px;
+  margin-right: 50px;
+  color: #000; 
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.taskduedatediv {
+  width: 230px;
+  color: #000; 
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.task.priorityHigh .tasktaskdiv,
+.task.priorityHigh .taskdescriptiondiv,
+.task.priorityHigh .taskprioritydiv,
+.task.priorityHigh .taskduedatediv {
+  color: red;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.task.priorityMedium .tasktaskdiv,
+.task.priorityMedium .taskdescriptiondiv,
+.task.priorityMedium .taskprioritydiv,
+.task.priorityMedium .taskduedatediv {
+  color: rgb(76, 113, 174);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.task.priorityLow .tasktaskdiv,
+.task.priorityLow .taskdescriptiondiv,
+.task.priorityLow .taskprioritydiv,
+.task.priorityLow .taskduedatediv {
+  color: rgb(5, 97, 5);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.taskactionsbtns{
+  margin-left: 150px;
+}
+.taskactionsbtns button{
+  all: unset;
+  cursor: pointer;
+  margin-left: 25px;
+}
+.delbtn{
+  margin-left: 150px;
 }

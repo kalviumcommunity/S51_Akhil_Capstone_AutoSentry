@@ -1,10 +1,14 @@
 const mongoose = require("mongoose");
+const { type } = require("os");
 
-// Define schema for maintenance tasks
 const maintenanceTaskSchema = new mongoose.Schema({
   user: {
     type: String,
     required: false,
+  },
+  vehicleId: {
+    type: String,
+    required: true,
   },
   task: {
     type: String,
@@ -23,8 +27,12 @@ const maintenanceTaskSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-},
-{
+  taskStatus: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
+}, {
   timestamps: true,
 });
 

@@ -11,7 +11,7 @@ import RedirectService from "./redirectService";
 
 const Garage = () => {
   const [vehicles, setVehicles] = useState([]);
-  const [loading, setLoading] = useState(true); 
+  const [loading, setLoading] = useState(true); // State to manage loading
   const { user, isAuthenticated } = useAuth0();
 
   useEffect(() => {
@@ -28,7 +28,7 @@ const Garage = () => {
           console.error("Error fetching data:", error);
         })
         .finally(() => {
-          setLoading(false);
+          setLoading(false); // Set loading to false whether data fetch succeeds or fails
         });
     }
   }, [user, isAuthenticated]);
@@ -67,7 +67,7 @@ const Garage = () => {
         ) : (
           <div className="vehicle-list">
             {vehicles.map((vehicle) => (
-              <div key={vehicle._id} className="vehicle-card" >
+              <div key={vehicle._id} className="vehicle-card">
                 <img src={vehicle.image} alt="Vehicle" />
                 <div className="vehicle-details">
                   <h3>
@@ -91,7 +91,7 @@ const Garage = () => {
                     </a>
                   </div>
                   <div className="activ-btns">
-                    <NavLink to={`/maintenancetask/${vehicle._id}`}>
+                    <NavLink to={`/maintenancetasks`}>
                       <button className="btn-mt">Maintenance tasks</button>
                     </NavLink>
                     <NavLink to={`/servicehistory`}>

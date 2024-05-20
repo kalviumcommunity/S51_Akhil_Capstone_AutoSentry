@@ -163,7 +163,7 @@ const AddNew = () => {
         </div>
       </div>
     )
-  );
+  ); 
 };
 
 export default AddNew;
