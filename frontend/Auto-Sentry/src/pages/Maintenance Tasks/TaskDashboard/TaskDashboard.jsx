@@ -216,7 +216,7 @@ const TaskDashboard = () => {
                     </div>
                     {!task.taskStatus && (
                       <div className="taskactionsbtns">
-                        <NavLink to={`/Googlecalender`}>
+                        <NavLink to={`/Googlecalender`}> 
                           <FaCalendarPlus color="#000000" size={20} />
                         </NavLink>
                         <button
