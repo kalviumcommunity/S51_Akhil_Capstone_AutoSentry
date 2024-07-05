@@ -1,3 +1,6 @@
+##Backend Deployed Link :- https://autosentry.onrender.com/
+##Frontend Deployed Link :- https://autosentry.netlify.app/
+
 # Auto Sentry
 
 ## Project Idea
@@ -27,6 +30,3 @@ Auto Sentry is a web application designed to assist vehicle owners in managing a
 8. **Development Workflow**: Use `npm run dev` for automatic reloading.
 9. **Troubleshooting**: Refer to documentation or issue tracker for help.
 
-
-##Backend Deployed Link :- https://autosentry.onrender.com/
-##Frontend Deployed Link :- https://autosentry.netlify.app/
