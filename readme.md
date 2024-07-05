@@ -1,5 +1,5 @@
-##Backend Deployed Link :- https://autosentry.onrender.com/
-##Frontend Deployed Link :- https://autosentry.netlify.app/
+# Backend Deployed Link :- https://autosentry.onrender.com/
+# Frontend Deployed Link :- https://autosentry.netlify.app/
 
 # Auto Sentry
 
