@@ -374,13 +374,15 @@ The app will be available at `http://localhost:5173`.
 
 ## Environment Variables
 
-The backend `.env` file should contain:
+Copy `backend/.env.example` to `backend/.env` and fill in your credentials:
 
 ```env
 PORT=5000
-MONGO_URI=mongodb+srv://<username>:<password>@cluster0.xxxxx.mongodb.net/test
-MONGO_TASKS_URI=mongodb+srv://<username>:<password>@cluster0.xxxxx.mongodb.net/tasks
+MONGO_URI=mongodb+srv://<username>:<password>@cluster0.xxxxx.mongodb.net/test?retryWrites=true&w=majority
+MONGO_TASKS_URI=mongodb+srv://<username>:<password>@cluster0.xxxxx.mongodb.net/tasks?retryWrites=true&w=majority
 ```
+
+The `.env` file is gitignored and should never be committed.
 
 > Note: The frontend credentials (Auth0, Firebase, Supabase) are currently configured directly in source files. For production, move them to a `.env` file and reference them via `import.meta.env.VITE_*` variables.
 
