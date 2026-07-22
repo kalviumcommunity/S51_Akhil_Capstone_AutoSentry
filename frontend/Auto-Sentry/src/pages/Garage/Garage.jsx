@@ -1,124 +1,183 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
-import { FaPlus, FaPen } from "react-icons/fa";
+import { FaPlus, FaPen, FaCalendarAlt, FaClipboardList, FaCar } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { useAuth0 } from "@auth0/auth0-react";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./Garage.css";
 import RedirectService from "./redirectService";
 
 const Garage = () => {
   const [vehicles, setVehicles] = useState([]);
-  const [loading, setLoading] = useState(true); 
+  const [loading, setLoading]   = useState(true);
+  const [error, setError]       = useState(null);
+  const [deleteId, setDeleteId] = useState(null);   // confirm before delete
   const { user, isAuthenticated } = useAuth0();
 
   useEffect(() => {
-    if (isAuthenticated && user && user.nickname) {
+    if (isAuthenticated && user?.nickname) {
       axios
-        .get("http://localhost:5000/api/vehicles")
-        .then((response) => {
-          const userVehicles = response.data.filter(
-            (vehicle) => vehicle.user === user.nickname
-          );
-          setVehicles(userVehicles);
+        .get("/api/vehicles")
+        .then((res) => {
+          setVehicles(res.data.filter((v) => v.user === user.nickname));
         })
-        .catch((error) => {
-          console.error("Error fetching data:", error);
-        })
-        .finally(() => {
-          setLoading(false);
-        });
+        .catch(() => setError("Failed to load vehicles. Please try again."))
+        .finally(() => setLoading(false));
     }
   }, [user, isAuthenticated]);
 
   const handleDelete = (id) => {
     axios
-      .delete(`http://localhost:5000/api/vehicles/deleteVehicle/${id}`)
-      .then((res) => {
-        console.log(res);
-        toast.success("Vehicle Deleted Successfully");
-        setVehicles((prevVehicles) =>
-          prevVehicles.filter((vehicle) => vehicle._id !== id)
-        );
+      .delete(`/api/vehicles/deleteVehicle/${id}`)
+      .then(() => {
+        toast.success("Vehicle removed from garage");
+        setVehicles((prev) => prev.filter((v) => v._id !== id));
+        setDeleteId(null);
       })
-      .catch((err) => console.log(err));
+      .catch(() => toast.error("Failed to delete vehicle"));
   };
 
+  if (!isAuthenticated) return null;
+
   return (
-    isAuthenticated && (
-      <div className="garage-container">
-        <h1>My Garage</h1>
-        <ToastContainer />
-        {loading ? ( 
-          <div className="loader">
-            <svg className="car" width="102" height="40" xmlns="http://www.w3.org/2000/svg">
-              <g transform="translate(2 1)" stroke="#002742" fill="none" fill-rule="cd  back  evenodd" stroke-linecap="round" stroke-linejoin="round">
-                <path className="car__body" d="M47.293 2.375C52.927.792 54.017.805 54.017.805c2.613-.445 6.838-.337 9.42.237l8.381 1.863c2.59.576 6.164 2.606 7.98 4.531l6.348 6.732 6.245 1.877c3.098.508 5.609 3.431 5.609 6.507v4.206c0 .29-2.536 4.189-5.687 4.189H36.808c-2.655 0-4.34-2.1-3.688-4.67 0 0 3.71-19.944 14.173-23.902zM36.5 15.5h54.01" stroke-width="3"/>
-                <ellipse className="car__wheel--left" stroke-width="3.2" fill="#FFF" cx="83.493" cy="30.25" rx="6.922" ry="6.808"/>
-                <ellipse className="car__wheel--right" stroke-width="3.2" fill="#FFF" cx="46.511" cy="30.25" rx="6.922" ry="6.808"/>
-                <path className="car__line car__line--top" d="M22.5 16.5H2.475" stroke-width="3"/>
-                <path className="car__line car__line--middle" d="M20.5 23.5H.4755" stroke-width="3"/>
-                <path className="car__line car__line--bottom" d="M25.5 9.5h-19" stroke-width="3"/>
-              </g>
-            </svg>
+    <div className="garage-page">
+
+      {/* ── PAGE HEADER ── */}
+      <div className="garage-header">
+        <div className="garage-header-inner">
+          <div>
+            <span className="garage-eyebrow">My Vehicles</span>
+            <h1 className="garage-title">My Garage</h1>
+            <p className="garage-subtitle">
+              {vehicles.length > 0
+                ? `${vehicles.length} vehicle${vehicles.length > 1 ? "s" : ""} tracked`
+                : "Add your first vehicle to get started"}
+            </p>
           </div>
-        ) : (
-          <div className="vehicle-list">
+          <NavLink to="/addnew" className="btn-add-vehicle">
+            <FaPlus /> Add Vehicle
+          </NavLink>
+        </div>
+      </div>
+
+      {/* ── BODY ── */}
+      <div className="garage-body">
+
+        {/* Loading */}
+        {loading && (
+          <div className="garage-loader">
+            <div className="garage-spinner" />
+            <p>Loading your garage…</p>
+          </div>
+        )}
+
+        {/* Error */}
+        {!loading && error && (
+          <div className="garage-empty">
+            <FaCar className="garage-empty-icon" />
+            <h3>Something went wrong</h3>
+            <p>{error}</p>
+          </div>
+        )}
+
+        {/* Empty state */}
+        {!loading && !error && vehicles.length === 0 && (
+          <div className="garage-empty">
+            <FaCar className="garage-empty-icon" />
+            <h3>Your garage is empty</h3>
+            <p>Add your first vehicle to start tracking maintenance.</p>
+            <NavLink to="/addnew" className="btn-add-vehicle">
+              <FaPlus /> Add Your First Car
+            </NavLink>
+          </div>
+        )}
+
+        {/* Vehicle grid */}
+        {!loading && !error && vehicles.length > 0 && (
+          <div className="vehicle-grid">
             {vehicles.map((vehicle) => (
-              <div key={vehicle._id} className="vehicle-card" >
-                <img src={vehicle.image} alt="Vehicle" />
-                <div className="vehicle-details">
-                  <h3>
-                    {vehicle.make} {vehicle.model}
-                  </h3>
-                  <p>Year: {vehicle.year}</p>
-                  <p>Modification: {vehicle.modification}</p>
-                  <div className="control-btns">
-                    <NavLink
-                      to={`/update/${vehicle._id}`}
-                      className="update"
-                      activeClassName="active"
-                    >
-                      <FaPen size={17}/>
-                    </NavLink>
-                    <a
-                      className="btn-danger"
-                      onClick={(e) => handleDelete(vehicle._id)}
-                    >
-                      <MdDelete size={18} />
-                    </a>
+              <div key={vehicle._id} className="vehicle-card">
+
+                {/* Card image */}
+                <div className="vehicle-img-wrap">
+                  {vehicle.image
+                    ? <img src={vehicle.image} alt={`${vehicle.make} ${vehicle.model}`} />
+                    : (
+                      <div className="vehicle-img-placeholder">
+                        <FaCar />
+                      </div>
+                    )
+                  }
+                  <span className="vehicle-year-badge">{vehicle.year}</span>
+                </div>
+
+                {/* Card body */}
+                <div className="vehicle-body">
+                  <div className="vehicle-body-top">
+                    <div>
+                      <h3 className="vehicle-name">{vehicle.make} {vehicle.model}</h3>
+                      {vehicle.modification && (
+                        <p className="vehicle-mod">{vehicle.modification}</p>
+                      )}
+                    </div>
+                    <div className="vehicle-controls">
+                      <NavLink to={`/update/${vehicle._id}`} className="ctrl-btn ctrl-btn--edit" aria-label="Edit vehicle">
+                        <FaPen size={13} />
+                      </NavLink>
+                      <button
+                        className="ctrl-btn ctrl-btn--delete"
+                        aria-label="Delete vehicle"
+                        onClick={() => setDeleteId(vehicle._id)}
+                      >
+                        <MdDelete size={16} />
+                      </button>
+                    </div>
                   </div>
-                  <div className="activ-btns">
-                    <NavLink to={`/maintenancetask/${vehicle._id}`}>
-                      <button className="btn-mt">Maintenance tasks</button>
+
+                  <div className="vehicle-divider" />
+
+                  <div className="vehicle-actions">
+                    <NavLink to={`/maintenancetask/${vehicle._id}`} className="veh-btn veh-btn--primary">
+                      <FaClipboardList /> Maintenance
                     </NavLink>
-                    <NavLink to={`/servicehistory`}>
-                      <button className="btn-mt">Service History</button>
+                    <NavLink to="/servicehistory" className="veh-btn veh-btn--secondary">
+                      <FaClipboardList /> Service History
                     </NavLink>
-                    <button
-                      className="btn-mt"
-                      onClick={() => RedirectService(vehicle.make)}
-                    >
-                      Book Service
+                    <button className="veh-btn veh-btn--outline" onClick={() => RedirectService(vehicle.make)}>
+                      <FaCalendarAlt /> Book Service
                     </button>
-                    <NavLink to={`/servicehistory`}>
-                      <button className="btn-mt">Empty</button>
-                    </NavLink>
                   </div>
                 </div>
               </div>
             ))}
-            <NavLink to="/addnew" className="addnew" activeClassName="active">
-              <FaPlus />
-              <h2>Add New Car</h2>
+
+            {/* Add new card */}
+            <NavLink to="/addnew" className="vehicle-card vehicle-card--add">
+              <div className="add-card-inner">
+                <div className="add-card-icon"><FaPlus /></div>
+                <p className="add-card-label">Add New Vehicle</p>
+              </div>
             </NavLink>
           </div>
         )}
-        <ToastContainer />
       </div>
-    )
+
+      {/* ── DELETE CONFIRM MODAL ── */}
+      {deleteId && (
+        <div className="modal-overlay" onClick={() => setDeleteId(null)}>
+          <div className="modal" onClick={(e) => e.stopPropagation()}>
+            <h3>Remove vehicle?</h3>
+            <p>This will permanently delete the vehicle and all its data. This action cannot be undone.</p>
+            <div className="modal-actions">
+              <button className="modal-btn modal-btn--cancel" onClick={() => setDeleteId(null)}>Cancel</button>
+              <button className="modal-btn modal-btn--confirm" onClick={() => handleDelete(deleteId)}>Yes, Remove</button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
   );
 };
 

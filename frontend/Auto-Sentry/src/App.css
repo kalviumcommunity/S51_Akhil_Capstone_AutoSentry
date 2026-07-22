@@ -1,10 +1,44 @@
-@import url('https://fonts.googleapis.com/css27?family=Sora&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
-*{
-    font-family: 'Sora', sans-serif;
+* {
+    font-family: 'Inter', system-ui, sans-serif;
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+}
 
-    
+/* All pages sit below the fixed navbar (88px tall).
+   The Home page manages its own hero padding-top internally. */
+#main-content > *:not(.home) {
+    padding-top: 88px;
+}
+
+/* Skip navigation link - visually hidden until focused */
+.skip-nav {
+    position: absolute;
+    left: -9999px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.skip-nav:focus {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    z-index: 9999;
+    padding: 0.75rem 1.25rem;
+    background: #1a1a2e;
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    border: 2px solid #ffffff;
+    border-radius: 0 0 4px 0;
+    outline: none;
 }
