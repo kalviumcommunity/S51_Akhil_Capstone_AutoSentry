@@ -164,9 +164,9 @@ Auto-Sentry/
         │   │       └── updateVehicle.css
         │   └── pages/
         │       ├── Home/                   # Landing page (hero, services, stats, testimonials, blog, newsletter, footer)
-        │       ├── About/
-        │       ├── Services/
-        │       ├── Contact/
+        │       ├── About/                  # Mission, stats, why-us cards, team, tech stack, CTA
+        │       ├── Services/               # Service cards grid, how-it-works steps, feature highlights, CTA
+        │       ├── Contact/                # Contact form, info card, social links, FAQ section
         │       ├── Login/
         │       ├── SignUP/
         │       ├── Garage/                 # Vehicle card grid, confirm-modal delete
@@ -353,9 +353,9 @@ Auto Sentry uses two separate Firebase projects:
 | Route | Component | Description |
 |---|---|---|
 | `/` | `Home` | Landing page — hero, services, stats, testimonials, blog, newsletter, footer |
-| `/about` | `About` | Information about Auto Sentry |
-| `/services` | `Services` | Overview of services offered |
-| `/contact-us` | `Contact` | Contact form |
+| `/about` | `About` | Mission statement, stats, why-choose-us feature cards, team profile, tech stack, CTA |
+| `/services` | `Services` | 8-card feature grid, how-it-works steps, alternating image highlights, CTA |
+| `/contact-us` | `Contact` | Two-column layout — contact info card + message form, FAQ section |
 | `/sign-up` | `SignupForm` | New user registration |
 | `/signin` | `LoginForm` | User sign-in |
 | `/garage` | `Garage` | Personal vehicle garage — card grid with edit/delete/actions |
