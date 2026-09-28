@@ -23,12 +23,12 @@ const VehicleSchema = mongoose.Schema(
       required: true,
     },
     vin: {
-      type: Number,
+      type: String,
       required: true,
     },
     image: {
-      data: Buffer, 
-      contentType: String,
+      type: String,
+      required: false,
     }
   },
   {

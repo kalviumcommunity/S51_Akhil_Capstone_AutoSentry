@@ -8,16 +8,16 @@ import App from './App.jsx'
 
 
 const supabase = createClient(
-  "https://iftdqglvxcgcurdolqpt.supabase.co",
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlmdGRxZ2x2eGNnY3VyZG9scXB0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTM4NTA3NTcsImV4cCI6MjAyOTQyNjc1N30.vGMLA5BWDi3q3s5-_s-4x6_yc6NGmA_8vruyLQZxWjQ"
+  import.meta.env.VITE_SUPABASE_URL,
+  import.meta.env.VITE_SUPABASE_ANON_KEY
 ); 
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <SessionContextProvider supabaseClient={supabase}>
       <Auth0Provider
-        domain="dev-prcadxa6cb3hoydl.us.auth0.com"
-        clientId="KBPcKOIylTB5bzloJPwUHktUOQRqC9iH"
+        domain={import.meta.env.VITE_AUTH0_DOMAIN}
+        clientId={import.meta.env.VITE_AUTH0_CLIENT_ID}
         authorizationParams={{
           redirect_uri: window.location.origin,
         }}

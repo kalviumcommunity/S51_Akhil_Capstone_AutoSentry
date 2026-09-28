@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser'); 
 const mongoose = require('mongoose');
@@ -12,7 +13,7 @@ app.use(bodyParser.json());
 app.use(express.static('website'));
 
 // First Database Connection
-mongoose.connect("mongodb+srv://akhilk49:iamtheadmin@cluster0.jngvggm.mongodb.net/test?retryWrites=true&w=majority&appName=Cluster0")
+mongoose.connect(process.env.MONGO_URI)
   .then(() => {
     console.log("Connected to First Database!");
     startServer();
@@ -22,7 +23,7 @@ mongoose.connect("mongodb+srv://akhilk49:iamtheadmin@cluster0.jngvggm.mongodb.ne
   });
 
 // Task Database Connection
-const secondDBConnection = mongoose.createConnection("mongodb+srv://akhilk49:iamtheadmin@cluster0.jngvggm.mongodb.net/tasks?retryWrites=true&w=majority&appName=Cluster0", { useNewUrlParser: true });
+const secondDBConnection = mongoose.createConnection(process.env.MONGO_TASKS_URI, { useNewUrlParser: true });
 
 secondDBConnection.on('error', console.error.bind(console, 'Second Database Connection Error:'));
 secondDBConnection.once('open', function () {
@@ -149,7 +150,11 @@ app.post('/api/vehicles', (req, res) => {
       })
       .catch(error => {
         console.error('Error creating vehicle:', error);
-        res.status(500).json({ message: error.message });
+        if (error.name === 'ValidationError') {
+          res.status(400).json({ message: error.message });
+        } else {
+          res.status(500).json({ message: error.message });
+        }
       });
 });
 
