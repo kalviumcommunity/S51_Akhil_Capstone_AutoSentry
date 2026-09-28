@@ -1,7 +1,4 @@
 {
-  "buildCommand": "cd frontend/Auto-Sentry && npm install && npm run build",
-  "outputDirectory": "frontend/Auto-Sentry/dist",
-  "framework": "vite",
   "rewrites": [
     {
       "source": "/(.*)",
