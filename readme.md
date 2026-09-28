@@ -482,6 +482,63 @@ VITE_FIREBASE_HISTORY_APP_ID=...
 
 ---
 
+## Deployment
+
+Auto Sentry is optimized for free deployment on **Vercel**. The project includes a `vercel.json` configuration file that handles the frontend build automatically.
+
+### 🚀 Deploy to Vercel (Recommended - Free)
+
+1. **Build Test** (optional, to verify locally):
+   ```bash
+   cd frontend/Auto-Sentry
+   npm run build
+   ```
+
+2. **Deploy to Vercel**:
+   - Visit [vercel.com/new](https://vercel.com/new)
+   - Connect your GitHub account
+   - Import this repository: `S51_Akhil_Capstone_AutoSentry`
+   - Vercel will auto-detect the configuration from `vercel.json`
+   - Add your environment variables (see below)
+   - Click "Deploy"
+
+3. **Environment Variables Setup**:
+   In your Vercel dashboard, add these environment variables:
+   ```
+   VITE_AUTH0_DOMAIN=your-auth0-domain.us.auth0.com
+   VITE_AUTH0_CLIENT_ID=your-auth0-client-id
+   VITE_FIREBASE_STORAGE_API_KEY=...
+   VITE_FIREBASE_STORAGE_AUTH_DOMAIN=...
+   VITE_FIREBASE_STORAGE_PROJECT_ID=...
+   VITE_FIREBASE_STORAGE_BUCKET=...
+   VITE_FIREBASE_STORAGE_MESSAGING_SENDER_ID=...
+   VITE_FIREBASE_STORAGE_APP_ID=...
+   VITE_FIREBASE_HISTORY_API_KEY=...
+   VITE_FIREBASE_HISTORY_AUTH_DOMAIN=...
+   VITE_FIREBASE_HISTORY_PROJECT_ID=...
+   VITE_FIREBASE_HISTORY_BUCKET=...
+   VITE_FIREBASE_HISTORY_MESSAGING_SENDER_ID=...
+   VITE_FIREBASE_HISTORY_APP_ID=...
+   VITE_SUPABASE_URL=https://your-project.supabase.co
+   VITE_SUPABASE_ANON_KEY=your-supabase-anon-key
+   ```
+
+4. **Your app will be live at**: `https://your-project-name.vercel.app`
+
+### Alternative Free Options
+
+- **Netlify**: Connect GitHub repo, set build command to `cd frontend/Auto-Sentry && npm run build`, publish directory to `frontend/Auto-Sentry/dist`
+- **GitHub Pages**: Enable in repo settings, configure Actions workflow for build/deploy
+- **Firebase Hosting**: `firebase init hosting` in the `frontend/Auto-Sentry` directory
+
+### Post-Deployment Setup
+
+1. **Update Auth0 Allowed Callback URLs**: Add your Vercel domain to Auth0 dashboard
+2. **Update Firebase Auth Domains**: Add your Vercel domain to Firebase console
+3. **CORS Configuration**: Update your backend CORS settings to include the Vercel domain
+
+---
+
 ## Available Scripts
 
 ### Backend

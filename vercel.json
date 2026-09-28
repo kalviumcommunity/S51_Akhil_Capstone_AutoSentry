@@ -1,0 +1,25 @@
+{
+  "version": 2,
+  "name": "auto-sentry",
+  "builds": [
+    {
+      "src": "frontend/Auto-Sentry/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/.*",
+      "dest": "/frontend/Auto-Sentry/index.html"
+    }
+  ],
+  "buildCommand": "cd frontend/Auto-Sentry && npm run build",
+  "outputDirectory": "frontend/Auto-Sentry/dist",
+  "installCommand": "cd frontend/Auto-Sentry && npm install"
+}
