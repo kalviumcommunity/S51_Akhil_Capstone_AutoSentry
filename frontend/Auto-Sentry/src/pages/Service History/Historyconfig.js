@@ -3,13 +3,12 @@ import { getStorage } from "firebase/storage"
 import { getFirestore } from "firebase/firestore"
 
 const firebaseConfig = {
-  apiKey: "AIzaSyB9sSNOiVAsOQBm6suFfL7oKIv_tmKVyJg",
-  authDomain: "autosentry-file-history.firebaseapp.com",
-  projectId: "autosentry-file-history",
-  storageBucket: "autosentry-file-history.appspot.com",
-  messagingSenderId: "700278950726",
-  appId: "1:700278950726:web:1e9fa5da47c022d29b7347",
-  measurementId: "G-MPEVEZWW80"
+  apiKey: import.meta.env.VITE_FIREBASE_HISTORY_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_HISTORY_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_HISTORY_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_HISTORY_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_HISTORY_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_HISTORY_APP_ID,
 };
 
 // Initialize Firebase
